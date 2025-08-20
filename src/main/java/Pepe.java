@@ -5,7 +5,7 @@ public class Pepe {
         Scanner scanner = new Scanner(System.in);
         String border = "____________________________________________________________";
         String input;
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int counter = 0;
 
         System.out.println(border);
@@ -26,11 +26,29 @@ public class Pepe {
                     System.out.println(i+1 + ". " + list[i]);
                 }
                 System.out.println(border);
-            } else {
+            } else if (input.startsWith("mark ")) {
+                int index = Integer.parseInt(input.substring(5)) - 1;
+                Task task = list[index];
+                task.markTask();
+                System.out.println(border);
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(task);
+                System.out.println(border);
+            }
+            else if (input.startsWith("unmark ")) {
+                int index = Integer.parseInt(input.substring(7)) - 1;
+                Task task = list[index];
+                task.unmarkTask();
+                System.out.println(border);
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println(task);
+                System.out.println(border);
+            }
+            else {
                 System.out.println(border);
                 System.out.println("added: " + input);
                 System.out.println(border);
-                list[counter] = input;
+                list[counter] = new Task(input);
                 counter++;
             }
         }
