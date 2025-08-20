@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+import java.io.IOException;
 
-public class PepeExceptions {
+public class PepeExceptions extends Exception {
+    public PepeExceptions(String message) {
+        super(message);
+    }
 }
