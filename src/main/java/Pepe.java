@@ -43,13 +43,49 @@ public class Pepe {
                 System.out.println("OK, I've marked this task as not done yet:");
                 System.out.println(task);
                 System.out.println(border);
+            } else if (input.startsWith("todo ")) {
+                String desc = input.substring(5);
+                Task t = new ToDos(desc);
+                list[counter] = t;
+                counter++;
+                System.out.println(border);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(t);
+                System.out.println("Now you have " + counter + " tasks in the list");
+                System.out.println(border);
+
+            } else if (input.startsWith("deadline")) {
+                String[] parts = input.substring(9).split(" /by ");
+                String taskName = parts[0];
+                String dateline = parts[1];
+                Task t = new Deadlines(taskName, dateline);
+                list[counter] = t;
+                counter++;
+                System.out.println(border);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(t);
+                System.out.println("Now you have " + counter + " tasks in the list");
+                System.out.println(border);
+
+            } else if (input.startsWith("event ")) {
+                String[] parts1 = input.substring(6).split(" /from ");
+                String taskName = parts1[0];
+                String[] parts2 = parts1[1].split(" /to ");
+                String startTime = parts2[0];
+                String endTime = parts2[1];
+                Task t = new Events(taskName, startTime, endTime);
+                list[counter] = t;
+                counter++;
+                System.out.println(border);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(t);
+                System.out.println("Now you have " + counter + " tasks in the list");
+                System.out.println(border);
             }
             else {
                 System.out.println(border);
                 System.out.println("added: " + input);
                 System.out.println(border);
-                list[counter] = new Task(input);
-                counter++;
             }
         }
 
