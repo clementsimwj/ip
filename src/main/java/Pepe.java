@@ -13,7 +13,7 @@ public class Pepe {
         System.out.println("Hello, I am Pepe!\n" + "How may I help you today?" );
         System.out.println(border);
 
-        while (true) {
+        while (scanner.hasNextLine()) {
             input = scanner.nextLine();
 
             if(input.equalsIgnoreCase("bye")) {
@@ -23,7 +23,7 @@ public class Pepe {
                 break;
             } else if (input.equalsIgnoreCase("list")) {
                 System.out.println(border);
-                if (list.get(0) == null) {
+                if (list.isEmpty()) {
                     System.out.println("Your Task List is Empty!");
                 } else {
                     for (int i = 0; i < counter; i++) {
@@ -105,7 +105,6 @@ public class Pepe {
                     String[] parts = input.substring(9).split(" /by ");
                     String taskName = parts[0];
                     String dateline = parts[1];
-                    System.out.println(taskName + " " + dateline);
                     Task t = new Deadlines(taskName, dateline);
                     list.add(t);
                     counter++;
@@ -163,6 +162,10 @@ public class Pepe {
                 } catch (PepeExceptions e) {
                     System.out.println(border);
                     System.out.println(e);
+                    System.out.println(border);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(border);
+                    System.out.println("Invalid index");
                     System.out.println(border);
                 }
             }
