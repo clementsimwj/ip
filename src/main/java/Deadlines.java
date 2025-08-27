@@ -1,9 +1,30 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+
 public class Deadlines extends Task{
     private String dateline;
+    private LocalDate date;
 
-    public Deadlines(String name, String dateline) {
+    public Deadlines(String name, String dateline) throws PepeExceptions {
         super(name);
-        this.dateline = dateline;
+        try {
+            this.date = LocalDate.parse(dateline);
+            this.dateline = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            if (date.isBefore(LocalDate.now())) {
+                throw new PepeExceptions("Invalid Input: Dateline cannot be before today!");
+            }
+        } catch (DateTimeParseException e) {
+            throw new PepeExceptions("Invalid Input: Please check the format of your dates (yyyy-mm-dd)");
+        }
+    }
+
+    public boolean isDueNextWeek() {
+        LocalDate today = LocalDate.now();
+        LocalDate nextWeek = today.plusWeeks(1);
+        return (this.date.isAfter(today) && this.date.isBefore(nextWeek));
     }
 
     @Override
@@ -13,6 +34,6 @@ public class Deadlines extends Task{
 
     @Override
     public String toFileFormat() {
-        return "T" + " | " + super.isMarked() +" | " + super.getName() + " | " + this.dateline;
+        return "D" + " | " + super.isMarked() +" | " + super.getName() + " | " + this.dateline;
     }
 }

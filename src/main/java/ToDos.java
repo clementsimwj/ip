@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class ToDos extends Task{
 
     public ToDos(String name) {
@@ -6,7 +8,13 @@ public class ToDos extends Task{
 
     @Override
     public String toString() {
+
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public boolean isDueNextWeek() {
+        return false;
     }
 
     @Override

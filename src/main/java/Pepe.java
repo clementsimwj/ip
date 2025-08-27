@@ -115,7 +115,8 @@ public class Pepe {
                         System.out.println(BORDER);
                         Storage.save(list);
                     } else {
-                        throw new PepeExceptions("Add a Deadline Task: deadline <task-name> /by <deadline>");
+                        throw new PepeExceptions("Add a Deadline Task: deadline <task-name> " +
+                                "/by <deadline> (In the format: yyyy-mm-dd)");
                     }
                     break;
                 case "event":
@@ -134,7 +135,9 @@ public class Pepe {
                         System.out.println(BORDER);
                         Storage.save(list);
                     } else {
-                        throw new PepeExceptions("Add an Event Task: event <task-name> /from <start-time> /to <end-time>");
+                        throw new PepeExceptions("Add an Event Task: event <task-name> " +
+                                "/from <start-time> " +
+                                "/to <end-time> (In the format: yyyy-mm-dd)");
                     }
                     break;
                 case "delete":
@@ -157,12 +160,31 @@ public class Pepe {
                         throw new PepeExceptions("To delete a task: delete <task-index> (task-index is a valid number)");
                     }
                     break;
+                case "due":
+                    ArrayList<Task> tasks = new ArrayList<>();
+                    for (Task task : list) {
+                        if (task.isDueNextWeek()) {
+                            tasks.add(task);
+                        }
+                    }
+                    System.out.println(BORDER);
+                    if (tasks.isEmpty()) {
+                        System.out.println("Nothing due next week...");
+                    } else {
+                        System.out.println("These are the task(s) that are due next week:");
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println((i + 1) + ". " + tasks.get(i));
+                        }
+                    }
+                    System.out.println(BORDER);
+                    break;
                 default:
                     System.out.println(BORDER);
                     System.out.println("""
                             I am sorry! I do not recognise this command!\
                             
                             To add Tasks: use todo, deadline or event\
+                            
                             
                             To mark or unmark a task: do mark or unmark""");
                     System.out.println(BORDER);
