@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import java.nio.file.Paths;
 import java.nio.file.Files;
 
@@ -35,22 +38,31 @@ public class Storage {
                     break;
                 case "D":
                     String by = parts[3].trim();
-                    Deadlines deadline = new Deadlines(taskName, by);
-                    if (isDone) {
-                        deadline.markTask();
+                    String dateline = rawDateToString(by);
+                    try {
+                        Deadlines deadline = new Deadlines(taskName, dateline);
+                        if (isDone) {
+                            deadline.markTask();
+                        }
+                        outputArray.add(deadline);
+                    } catch (PepeExceptions e) {
+                        System.out.println(e.toString());
                     }
-                    outputArray.add(deadline);
                     break;
                 case "E":
                     String time= parts[3].trim();
                     String[] fromAndTo = time.split("-");
-                    String from = fromAndTo[0].trim();
-                    String to = fromAndTo[1].trim();
-                    Events event = new Events(taskName, from, to);
-                    if (isDone) {
-                        event.markTask();
+                    String from = rawDateToString(fromAndTo[0].trim());
+                    String to = rawDateToString(fromAndTo[1].trim());
+                    try {
+                        Events event = new Events(taskName, from, to);
+                        if (isDone) {
+                            event.markTask();
+                        }
+                        outputArray.add(event);
+                    } catch (PepeExceptions e) {
+                        System.out.println(e.toString());
                     }
-                    outputArray.add(event);
                     break;
                 default:
                     System.out.println("Unknown task type: " + line);
@@ -84,5 +96,12 @@ public class Storage {
         } finally {
             fileWriter.close();
         }
+    }
+
+    public static String rawDateToString(String rawDate) {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        LocalDate date = LocalDate.parse(rawDate, inputFormatter);
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return date.format(outputFormatter);
     }
 }

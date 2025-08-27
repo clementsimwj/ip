@@ -26,6 +26,8 @@ abstract class Task {
         return this.marked ? 1 : 0;
     }
 
+    abstract public boolean isDueNextWeek();
+
     @Override
     public String toString() {
         String markSymbol = this.marked ? "X" : " ";
