@@ -1,0 +1,19 @@
+import java.io.IOException;
+
+public class EventCommand extends Command {
+    private Task task;
+
+    public EventCommand(Task task) {
+        this.task = task;
+    }
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
+        try {
+            tasks.addTask(this.task);
+            ui.uiEvent(tasks, this.task);
+            storage.save(tasks);
+        } catch (IOException e) {
+            throw new PepeExceptions("Error saving file: " + e.getMessage());
+        }
+    }
+}

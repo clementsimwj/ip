@@ -11,8 +11,7 @@ public class DeleteCommand extends Command{
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
        try {
            if (index >= 0 && index < tasks.size()) {
-               tasks.deleteTask(index);
-               ui.uiDelete(tasks, tasks.get(index));
+               ui.uiDelete(tasks, tasks.deleteTask(index));
            } else {
                throw new PepeExceptions("There is no task at index: " + (index + 1));
            }

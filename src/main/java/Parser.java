@@ -52,6 +52,30 @@ public class Parser {
             } else {
                 throw new PepeExceptions("Add a ToDo task: todo <task-name>");
             }
+        case "event":
+            Matcher eventMatcher = EVENT_PATTERN.matcher(input);
+            if (eventMatcher.matches()) {
+                String taskName = eventMatcher.group(1);
+                String startTime = eventMatcher.group(2);
+                String endTime = eventMatcher.group(3);
+                Task task = new Events(taskName, startTime, endTime);
+                return new EventCommand(task);
+            } else {
+                throw new PepeExceptions("Add an Event Task: event <task-name> " +
+                        "/from <start-time> " +
+                        "/to <end-time> (In the format: yyyy-mm-dd)");
+            }
+        case "deadline":
+            Matcher deadlineMatcher = DEADLINE_PATTERN.matcher(input);
+            if (deadlineMatcher.matches()) {
+                String taskName = deadlineMatcher.group(1);
+                String deadline = deadlineMatcher.group(2);
+                Task task = new Deadlines(taskName, deadline);
+                return new DeadlineCommand(task);
+            } else {
+                throw new PepeExceptions("Add a Deadline Task: deadline <task-name> " +
+                        "/by <deadline> (In the format: yyyy-mm-dd)");
+            }
         default:
             throw new PepeExceptions("Invalid Command!");
         }
