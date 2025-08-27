@@ -12,4 +12,9 @@ public class Events extends Task{
     public String toString() {
         return "[E]" + super.toString() + " (from: " + startTime + " to: " + endTime + ")";
     }
+
+    @Override
+    public String toFileFormat() {
+        return "E" + " | " + super.isMarked() +" | " + super.getName() + " | " + this.startTime + " - " + this.endTime;
+    }
 }

@@ -10,4 +10,9 @@ public class Deadlines extends Task{
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dateline +")";
     }
+
+    @Override
+    public String toFileFormat() {
+        return "T" + " | " + super.isMarked() +" | " + super.getName() + " | " + this.dateline;
+    }
 }
