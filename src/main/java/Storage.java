@@ -13,11 +13,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String FILE_PATH = "./data/tasks.txt";
+    private final String filePath;
 
-    public static ArrayList<Task> load() throws IOException {
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public ArrayList<Task> load() throws PepeExceptions {
         ArrayList<Task> outputArray = new ArrayList<>(100);
-        File file = new File(FILE_PATH);
+        File file = new File(this.filePath);
         try {
             Scanner scanner = new Scanner(file);
             System.out.println("File tasks.txt exists");
@@ -78,16 +82,16 @@ public class Storage {
                 file.createNewFile();
                 System.out.println("Successfully created file: ./data/tasks.txt");
             } catch (IOException ioException) {
-                System.out.println("Error creating file: " + ioException.getMessage());
+                throw new PepeExceptions("Error creating file: " + ioException.getMessage());
             }
         }
         return outputArray;
     }
 
-    public static void save(ArrayList<Task> tasks) throws IOException {
-        FileWriter fileWriter = new FileWriter(FILE_PATH);
+    public void save(TaskList tasks) throws IOException {
+        FileWriter fileWriter = new FileWriter(this.filePath);
         try {
-            for (Task task : tasks) {
+            for (Task task : tasks.getTaskList()) {
                 fileWriter.write(task.toFileFormat() + System.lineSeparator());
             }
             fileWriter.close();
@@ -98,7 +102,7 @@ public class Storage {
         }
     }
 
-    public static String rawDateToString(String rawDate) {
+    public String rawDateToString(String rawDate) {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         LocalDate date = LocalDate.parse(rawDate, inputFormatter);
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

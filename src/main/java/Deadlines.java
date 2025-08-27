@@ -24,7 +24,7 @@ public class Deadlines extends Task{
     public boolean isDueNextWeek() {
         LocalDate today = LocalDate.now();
         LocalDate nextWeek = today.plusWeeks(1);
-        return (this.date.isAfter(today) && this.date.isBefore(nextWeek));
+        return ((this.date.isAfter(today) || this.date.isEqual(today)) && this.date.isBefore(nextWeek));
     }
 
     @Override
