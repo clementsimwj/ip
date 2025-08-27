@@ -1,20 +1,59 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Pepe {
+    //Constants
     private static final String BORDER = "____________________________________________________________";
+    private static final String FILE_PATH = "./data/tasks.txt";
+    //Fields
+    private final Storage storage;
+    private TaskList tasks;
+    private final Ui ui;
 
-    //Regex Patterns
-    private static final Pattern TODO_PATTERN = Pattern.compile("^todo\\s+(.+)$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern EVENT_PATTERN = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern MARK_PATTERN = Pattern.compile("^mark\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern UNMARK_PATTERN = Pattern.compile("^unmark\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern DELETE_PATTERN = Pattern.compile("^delete\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
+    public Pepe(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (PepeExceptions e) {
+            ui.showError(e.getMessage());
+            tasks = new TaskList();
+        }
 
-    public static void main(String[] args) throws Exception {
+    }
+
+    public void run() {
+        ui.uiGreet();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (PepeExceptions e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Pepe("data/tasks.txt").run();
+    }
+
+}
+
+
+
+
+
+
+/*    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> list = Storage.load();
         int counter = 0;
@@ -160,32 +199,14 @@ public class Pepe {
                         throw new PepeExceptions("To delete a task: delete <task-index> (task-index is a valid number)");
                     }
                     break;
-                case "due":
-                    ArrayList<Task> tasks = new ArrayList<>();
-                    for (Task task : list) {
-                        if (task.isDueNextWeek()) {
-                            tasks.add(task);
-                        }
-                    }
-                    System.out.println(BORDER);
-                    if (tasks.isEmpty()) {
-                        System.out.println("Nothing due next week...");
-                    } else {
-                        System.out.println("These are the task(s) that are due next week:");
-                        for (int i = 0; i < tasks.size(); i++) {
-                            System.out.println((i + 1) + ". " + tasks.get(i));
-                        }
-                    }
-                    System.out.println(BORDER);
-                    break;
                 default:
                     System.out.println(BORDER);
                     System.out.println("""
                             I am sorry! I do not recognise this command!\
-                            
+
                             To add Tasks: use todo, deadline or event\
-                            
-                            
+
+
                             To mark or unmark a task: do mark or unmark""");
                     System.out.println(BORDER);
                 }
@@ -195,5 +216,4 @@ public class Pepe {
             }
 
         }
-    }
-}
+    }*/
