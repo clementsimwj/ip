@@ -46,6 +46,13 @@ public class Pepe {
         new Pepe("data/tasks.txt").run();
     }
 
+}
+
+
+
+
+
+
 /*    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> list = Storage.load();
@@ -196,10 +203,10 @@ public class Pepe {
                     System.out.println(BORDER);
                     System.out.println("""
                             I am sorry! I do not recognise this command!\
-                            
+
                             To add Tasks: use todo, deadline or event\
-                            
-                            
+
+
                             To mark or unmark a task: do mark or unmark""");
                     System.out.println(BORDER);
                 }
@@ -210,4 +217,3 @@ public class Pepe {
 
         }
     }*/
-}
