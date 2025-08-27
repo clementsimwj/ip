@@ -1,6 +1,6 @@
-import java.time.LocalDate;
+package pepe.task;
 
-public class ToDos extends Task{
+public class ToDos extends Task {
 
     public ToDos(String name) {
         super(name);

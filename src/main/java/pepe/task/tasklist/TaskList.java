@@ -1,3 +1,7 @@
+package pepe.task.tasklist;
+
+import pepe.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
