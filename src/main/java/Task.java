@@ -1,5 +1,5 @@
-public class Task {
-    private String name;
+abstract class Task {
+    private final String name;
     private boolean marked;
 
     public Task(String name) {
@@ -8,15 +8,22 @@ public class Task {
     }
 
     public void markTask(){
+
         this.marked = true;
     }
 
     public void unmarkTask() {
+
         this.marked = false;
     }
 
     public String getName() {
+
         return this.name;
+    }
+
+    public int isMarked() {
+        return this.marked ? 1 : 0;
     }
 
     @Override
@@ -24,4 +31,6 @@ public class Task {
         String markSymbol = this.marked ? "X" : " ";
         return "[" + markSymbol + "] " + this.name;
     }
+
+    abstract public String toFileFormat();
 }

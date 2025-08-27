@@ -8,4 +8,9 @@ public class ToDos extends Task{
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String toFileFormat() {
+        return "T" + " | " + super.isMarked() +" | " + super.getName();
+    }
 }
