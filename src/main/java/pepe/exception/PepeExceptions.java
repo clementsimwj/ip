@@ -1,4 +1,4 @@
-import java.io.IOException;
+package pepe.exception;
 
 public class PepeExceptions extends Exception {
     public PepeExceptions(String message) {

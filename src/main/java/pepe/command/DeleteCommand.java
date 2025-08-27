@@ -1,6 +1,13 @@
+package pepe.command;
+
+import pepe.exception.PepeExceptions;
+import pepe.storage.Storage;
+import pepe.task.tasklist.TaskList;
+import pepe.ui.Ui;
+
 import java.io.IOException;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int index;
 
     public DeleteCommand(int index) {

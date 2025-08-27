@@ -1,3 +1,11 @@
+package pepe.command;
+
+import pepe.exception.PepeExceptions;
+import pepe.storage.Storage;
+import pepe.task.Task;
+import pepe.task.tasklist.TaskList;
+import pepe.ui.Ui;
+
 import java.io.IOException;
 
 public class DeadlineCommand extends Command {
@@ -14,7 +22,7 @@ public class DeadlineCommand extends Command {
             ui.uiDeadline(tasks, this.task);
             storage.save(tasks);
         } catch (IOException e) {
-            throw new PepeExceptions("Add a Deadline Task: deadline <task-name> " +
+            throw new PepeExceptions("Add a Deadline Task: deadline <pepe.task-name> " +
                     "/by <deadline> (In the format: yyyy-mm-dd)");
         }
     }

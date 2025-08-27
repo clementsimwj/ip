@@ -1,10 +1,15 @@
+package pepe.ui;
+
+import pepe.task.Task;
+import pepe.task.tasklist.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
     private final String BORDER = "____________________________________________________________";
     private Scanner scanner = new Scanner(System.in);
 
-    //Read Command
+    //Read pepe.command.Command
     public String readCommand() {
         return scanner.nextLine();
     }
@@ -17,7 +22,7 @@ public class Ui {
     //Greet
     public void uiGreet() {
         System.out.println(BORDER);
-        System.out.println("Hello, I am Pepe!\nHow may I help you today?");
+        System.out.println("Hello, I am pepe.Pepe!\nHow may I help you today?");
         System.out.println(BORDER);
     }
 
@@ -32,7 +37,7 @@ public class Ui {
     public void uiList(TaskList taskList) {
         System.out.println(BORDER);
         if (taskList.isEmpty()) {
-            System.out.println("Your Task List is Empty...");
+            System.out.println("Your pepe.task.Task List is Empty...");
         } else {
             for (int i = 0; i < taskList.size(); i++) {
                 System.out.println((i + 1) + ". " + taskList.get(i));
@@ -44,7 +49,7 @@ public class Ui {
     //Mark
     public void uiMark(Task task) {
         System.out.println(BORDER);
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("Nice! I've marked this pepe.task as done:");
         System.out.println(task);
         System.out.println(BORDER);
     }
@@ -52,7 +57,7 @@ public class Ui {
     //UnMark
     public void uiUnmark(Task task) {
         System.out.println(BORDER);
-        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println("OK, I've marked this pepe.task as not done yet:");
         System.out.println(task);
         System.out.println(BORDER);
     }
@@ -60,7 +65,7 @@ public class Ui {
     //Todo
     public void uiToDo(TaskList list, Task task) {
         System.out.println(BORDER);
-        System.out.println("Got it. I've added this task:");
+        System.out.println("Got it. I've added this pepe.task:");
         System.out.println(task);
         System.out.println("Now you have " + list.size() + " tasks in the list");
         System.out.println(BORDER);
@@ -69,7 +74,7 @@ public class Ui {
     //Deadline
     public void uiDeadline(TaskList list, Task task) {
         System.out.println(BORDER);
-        System.out.println("Got it. I've added this task:");
+        System.out.println("Got it. I've added this pepe.task:");
         System.out.println(task);
         System.out.println("Now you have " + list.size() + " tasks in the list");
         System.out.println(BORDER);
@@ -78,7 +83,7 @@ public class Ui {
     //Event
     public void uiEvent(TaskList list, Task task) {
         System.out.println(BORDER);
-        System.out.println("Got it. I've added this task:");
+        System.out.println("Got it. I've added this pepe.task:");
         System.out.println(task);
         System.out.println("Now you have " + list.size() + " tasks in the list");
         System.out.println(BORDER);
@@ -87,7 +92,7 @@ public class Ui {
     //Delete
     public void uiDelete(TaskList list, Task task) {
         System.out.println(BORDER);
-        System.out.println("Noted. I've removed this task:");
+        System.out.println("Noted. I've removed this pepe.task:");
         System.out.println(task);
         System.out.println("Now you have " + list.size() + " tasks in the list");
         System.out.println(BORDER);

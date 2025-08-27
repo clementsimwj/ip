@@ -1,4 +1,6 @@
-abstract class Task {
+package pepe.task;
+
+public abstract class Task {
     private final String name;
     private boolean marked;
 
