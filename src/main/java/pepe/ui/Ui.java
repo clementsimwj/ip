@@ -152,6 +152,24 @@ public class Ui {
     }
 
     /**
+     * Displays an ArrayList of type Task from the list.
+     *
+     * @param tasks the TaskList showing matches
+     */
+    public void uiFind(TaskList tasks) {
+        System.out.println(BORDER);
+        System.out.println("Here are the matching tasks according to your search:");
+        if (tasks.isEmpty()) {
+            System.out.println("Hmm...it looks the task you want isn't added yet!");
+        } else {
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + ". " + tasks.get(i));
+            }
+        }
+        System.out.println(BORDER);
+    }
+
+    /**
      * Displays an error message to the user.
      *
      * @param message the error message to display
