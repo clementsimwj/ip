@@ -7,6 +7,12 @@ import pepe.storage.Storage;
 import pepe.task.tasklist.TaskList;
 import pepe.ui.Ui;
 
+/**
+ * Main class for the Pepe application, a command-line task manager.
+ * <p>
+ * This class initializes the application, loads tasks from storage,
+ * handles user input through the Ui, and executes commands using the Parser.
+ */
 public class Pepe {
     //Constants
     private static final String BORDER = "____________________________________________________________";
@@ -16,6 +22,13 @@ public class Pepe {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructs a new Pepe application instance with the given storage file path.
+     * <p>
+     * Loads tasks from the storage file. If loading fails, initializes an empty TaskList.
+     *
+     * @param filePath the path to the storage file for tasks
+     */
     public Pepe(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,6 +41,12 @@ public class Pepe {
 
     }
 
+    /**
+     * Runs the main loop of the Pepe application.
+     * <p>
+     * The loop repeatedly reads user commands, parses them, executes the
+     * corresponding command, and updates the task list until the user exits.
+     */
     public void run() {
         ui.uiGreet();
         boolean isExit = false;
@@ -45,6 +64,13 @@ public class Pepe {
         }
     }
 
+    /**
+     * Entry point for the Pepe application.
+     * <p>
+     * Initializes a Pepe instance with the default task storage path and runs the main loop.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         new Pepe("data/tasks.txt").run();
     }
