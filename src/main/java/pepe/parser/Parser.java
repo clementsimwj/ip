@@ -19,6 +19,7 @@ public class Parser {
     private static final Pattern MARK_PATTERN = Pattern.compile("^mark\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern UNMARK_PATTERN = Pattern.compile("^unmark\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern DELETE_PATTERN = Pattern.compile("^delete\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern FIND_PATTERN = Pattern.compile("^find\\s+(.+)$", Pattern.CASE_INSENSITIVE);
 
     public static Command parse(String input) throws PepeExceptions{
         String command = input.split(" ", 2)[0].toLowerCase();
@@ -84,6 +85,14 @@ public class Parser {
             } else {
                 throw new PepeExceptions("Add a Deadline Task: deadline <task-name> " +
                         "/by <deadline> (In the format: yyyy-mm-dd)");
+            }
+        case "find":
+            Matcher findMatcher = FIND_PATTERN.matcher(input);
+            if (findMatcher.matches()) {
+                String taskName = findMatcher.group(1);
+                return new FindCommand(taskName);
+            } else {
+                throw new PepeExceptions("Find a Task: find <task-name>");
             }
         default:
             throw new PepeExceptions("Invalid Command!");

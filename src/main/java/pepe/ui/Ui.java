@@ -5,6 +5,7 @@ import pepe.exception.PepeExceptions;
 import pepe.task.Task;
 import pepe.task.tasklist.TaskList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -98,6 +99,20 @@ public class Ui {
         System.out.println("Noted. I've removed this pepe.task:");
         System.out.println(task);
         System.out.println("Now you have " + list.size() + " tasks in the list");
+        System.out.println(BORDER);
+    }
+
+    //Find
+    public void uiFind(TaskList tasks) {
+        System.out.println(BORDER);
+        System.out.println("Here are the matching tasks according to your search:");
+        if (tasks.isEmpty()) {
+            System.out.println("Hmm...it looks the task you want isn't added yet!");
+        } else {
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + ". " + tasks.get(i));
+            }
+        }
         System.out.println(BORDER);
     }
 
