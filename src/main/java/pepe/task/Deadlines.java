@@ -6,10 +6,23 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Deadline task.
+ * <p>
+ * A Deadline task has a name, a marked status, and a due date.
+ * The due date cannot be before the current date.
+ */
 public class Deadlines extends Task {
     private String dateline;
     private LocalDate date;
 
+    /**
+     * Constructs a new Deadline task with the given name and due date.
+     *
+     * @param name     the name or description of the task
+     * @param dateline the due date in the format yyyy-MM-dd
+     * @throws PepeExceptions if the date is invalid or before today
+     */
     public Deadlines(String name, String dateline) throws PepeExceptions {
         super(name);
         try {
@@ -23,17 +36,36 @@ public class Deadlines extends Task {
         }
     }
 
+    /**
+     * Checks if the deadline is within the next week.
+     *
+     * @return true if the deadline is today or within the next 7 days, false otherwise
+     */
     public boolean isDueNextWeek() {
         LocalDate today = LocalDate.now();
         LocalDate nextWeek = today.plusWeeks(1);
         return ((this.date.isAfter(today) || this.date.isEqual(today)) && this.date.isBefore(nextWeek));
     }
 
+    /**
+     * Returns a string representation of the Deadline task for display.
+     * <p>
+     * Format: [D][X] taskName (by: MMM d yyyy) if marked, [D][ ] taskName (by: MMM d yyyy) if unmarked.
+     *
+     * @return a human-readable string representing the Deadline task
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dateline +")";
     }
 
+    /**
+     * Returns a string representing the Deadline task in a file-friendly format.
+     * <p>
+     * Format: D | 1 | taskName | MMM d yyyy (if marked) or D | 0 | taskName | MMM d yyyy (if unmarked)
+     *
+     * @return the Deadline task formatted for saving to a file
+     */
     @Override
     public String toFileFormat() {
         return "D" + " | " + super.isMarked() +" | " + super.getName() + " | " + this.dateline;

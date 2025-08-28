@@ -18,13 +18,35 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles storage and retrieval of tasks from a file.
+ * <p>
+ * This class manages loading tasks from a text file into memory
+ * and saving tasks from memory back into the file in a specific
+ * file format.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Creates a Storage instance for a given file path.
+     *
+     * @param filePath the path to the file where tasks are stored
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the file at the given file path.
+     * <p>
+     * The method will attempt to parse each line into a Task object
+     * (ToDos, Deadlines, Events) and mark them as done if specified.
+     * If the file does not exist, it will be created.
+     *
+     * @return an ArrayList of Tasks loaded from the file
+     * @throws PepeExceptions if there is an error creating the file
+     */
     public ArrayList<Task> load() throws PepeExceptions {
         ArrayList<Task> outputArray = new ArrayList<>(100);
         File file = new File(this.filePath);
@@ -94,6 +116,14 @@ public class Storage {
         return outputArray;
     }
 
+    /**
+     * Saves the given list of tasks to the file.
+     * <p>
+     * Each task is written in its file format on a new line.
+     *
+     * @param tasks the TaskList containing tasks to save
+     * @throws IOException if there is an error writing to the file
+     */
     public void save(TaskList tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(this.filePath);
         try {
@@ -108,6 +138,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts a raw date string (e.g., "Dec 31 2025") to a standard
+     * string format (yyyy-MM-dd) used internally.
+     *
+     * @param rawDate the raw date string from the file
+     * @return the date string in yyyy-MM-dd format
+     */
     public String rawDateToString(String rawDate) {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         LocalDate date = LocalDate.parse(rawDate, inputFormatter);

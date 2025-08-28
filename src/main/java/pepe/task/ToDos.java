@@ -1,22 +1,53 @@
 package pepe.task;
 
+/**
+ * Represents a ToDo task.
+ * <p>
+ * A ToDo task has a name and a marked status, but no specific date or deadline.
+ */
 public class ToDos extends Task {
 
+    /**
+     * Constructs a new ToDo task with the given name.
+     *
+     * @param name the name or description of the task
+     */
     public ToDos(String name) {
         super(name);
     }
 
+    /**
+     * Returns a string representation of the ToDo task for display.
+     * <p>
+     * Format: [T][X] taskName if marked, [T][ ] taskName if unmarked.
+     *
+     * @return a human-readable string representing the ToDo task
+     */
     @Override
     public String toString() {
 
         return "[T]" + super.toString();
     }
 
+    /**
+     * Checks if the ToDo task is due next week.
+     * <p>
+     * Always returns false as ToDo tasks do not have a specific due date.
+     *
+     * @return false
+     */
     @Override
     public boolean isDueNextWeek() {
         return false;
     }
 
+    /**
+     * Returns a string representing the ToDo task in a file-friendly format.
+     * <p>
+     * Format: T | 1 | taskName (if marked) or T | 0 | taskName (if unmarked)
+     *
+     * @return the ToDo task formatted for saving to a file
+     */
     @Override
     public String toFileFormat() {
         return "T" + " | " + super.isMarked() +" | " + super.getName();

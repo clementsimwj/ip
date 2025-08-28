@@ -10,6 +10,12 @@ import pepe.task.ToDos;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Parser class for converting user input strings into executable Commands.
+ * <p>
+ * It uses regular expressions to identify the type of command and extracts
+ * necessary arguments for task creation or manipulation.
+ */
 public class Parser {
 
     //Regex Patterns
@@ -20,6 +26,25 @@ public class Parser {
     private static final Pattern UNMARK_PATTERN = Pattern.compile("^unmark\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern DELETE_PATTERN = Pattern.compile("^delete\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
 
+    /**
+     * Parses a user input string and returns the corresponding Command object.
+     * <p>
+     * Supported commands include:
+     * <ul>
+     *     <li>bye</li>
+     *     <li>list</li>
+     *     <li>mark &lt;task-index&gt;</li>
+     *     <li>unmark &lt;task-index&gt;</li>
+     *     <li>delete &lt;task-index&gt;</li>
+     *     <li>todo &lt;task-name&gt;</li>
+     *     <li>deadline &lt;task-name&gt; /by &lt;deadline&gt;</li>
+     *     <li>event &lt;task-name&gt; /from &lt;start-time&gt; /to &lt;end-time&gt;</li>
+     * </ul>
+     *
+     * @param input the raw input string from the user
+     * @return a Command object representing the action to be executed
+     * @throws PepeExceptions if the input does not match any valid command format
+     */
     public static Command parse(String input) throws PepeExceptions{
         String command = input.split(" ", 2)[0].toLowerCase();
 
