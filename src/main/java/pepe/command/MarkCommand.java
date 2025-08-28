@@ -1,12 +1,13 @@
 package pepe.command;
 
+import java.io.IOException;
+
 import pepe.exception.PepeExceptions;
 import pepe.storage.Storage;
 import pepe.task.Task;
 import pepe.task.tasklist.TaskList;
 import pepe.ui.Ui;
 
-import java.io.IOException;
 
 public class MarkCommand extends Command {
     private int index;

@@ -1,12 +1,5 @@
 package pepe.storage;
 
-import pepe.exception.PepeExceptions;
-import pepe.task.Deadlines;
-import pepe.task.Events;
-import pepe.task.Task;
-import pepe.task.ToDos;
-import pepe.task.tasklist.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,6 +10,13 @@ import java.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import pepe.exception.PepeExceptions;
+import pepe.task.Deadlines;
+import pepe.task.Events;
+import pepe.task.Task;
+import pepe.task.ToDos;
+import pepe.task.tasklist.TaskList;
 
 public class Storage {
     private final String filePath;
