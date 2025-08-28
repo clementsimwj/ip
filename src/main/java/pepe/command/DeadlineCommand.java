@@ -1,12 +1,13 @@
 package pepe.command;
 
+import java.io.IOException;
+
 import pepe.exception.PepeExceptions;
 import pepe.storage.Storage;
 import pepe.task.Task;
 import pepe.task.tasklist.TaskList;
 import pepe.ui.Ui;
 
-import java.io.IOException;
 
 /**
  * Command to add a {@link pepe.task.Deadlines} task to the task list.

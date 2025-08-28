@@ -1,11 +1,12 @@
 package pepe.ui;
 
+import java.util.Scanner;
+
 import pepe.Pepe;
 import pepe.exception.PepeExceptions;
 import pepe.task.Task;
 import pepe.task.tasklist.TaskList;
 
-import java.util.Scanner;
 
 /**
  * Handles all user interactions for the Pepe application.

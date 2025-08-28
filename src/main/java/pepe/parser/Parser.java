@@ -1,14 +1,14 @@
 package pepe.parser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import pepe.command.*;
 import pepe.exception.PepeExceptions;
 import pepe.task.Deadlines;
 import pepe.task.Events;
 import pepe.task.Task;
 import pepe.task.ToDos;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Parser class for converting user input strings into executable Commands.
