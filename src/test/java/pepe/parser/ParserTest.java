@@ -23,6 +23,6 @@ class ParserTest {
     @Test
     void testInvalidCommandThrowsException() {
         PepeExceptions exception = assertThrows(PepeExceptions.class, () -> Parser.parse("foobar"));
-        assertEquals("Invalid pepe.command.Command!", exception.getMessage());
+        assertEquals("Invalid Command!", exception.getMessage());
     }
 }

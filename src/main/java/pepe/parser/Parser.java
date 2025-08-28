@@ -34,7 +34,7 @@ public class Parser {
                 int index = Integer.parseInt(markMatcher.group(1)) - 1;
                 return new MarkCommand(index);
             } else {
-                throw new PepeExceptions("To mark a pepe.task: mark <pepe.task-index> (pepe.task-index is a valid number)");
+                throw new PepeExceptions("To mark a task: mark <task-index> (task-index is a valid number)");
             }
         case "unmark":
             Matcher unmarkMatcher = UNMARK_PATTERN.matcher(input);
@@ -42,7 +42,7 @@ public class Parser {
                 int index = Integer.parseInt(unmarkMatcher.group(1)) - 1;
                 return new UnmarkCommand(index);
             } else {
-                throw new PepeExceptions("To unmark a pepe.task: unmark <pepe.task-index> (pepe.task-index is a valid number)");
+                throw new PepeExceptions("To unmark a task: unmark <task-index> (task-index is a valid number)");
             }
         case "delete":
             Matcher deleteMatcher = DELETE_PATTERN.matcher(input);
@@ -50,7 +50,7 @@ public class Parser {
                 int index = Integer.parseInt(deleteMatcher.group(1)) - 1;
                 return new DeleteCommand(index);
             } else {
-                throw new PepeExceptions("To delete a pepe.task: delete <pepe.task-index> (pepe.task-index is a valid number)");
+                throw new PepeExceptions("To delete a task: delete <task-index> (task-index is a valid number)");
             }
         case "todo":
             Matcher todoMatcher = TODO_PATTERN.matcher(input);
@@ -59,7 +59,7 @@ public class Parser {
                 Task task = new ToDos(taskName);
                 return new TodoCommand(task);
             } else {
-                throw new PepeExceptions("Add a ToDo pepe.task: todo <pepe.task-name>");
+                throw new PepeExceptions("Add a ToDo task: todo <task-name>");
             }
         case "event":
             Matcher eventMatcher = EVENT_PATTERN.matcher(input);
@@ -70,7 +70,7 @@ public class Parser {
                 Task task = new Events(taskName, startTime, endTime);
                 return new EventCommand(task);
             } else {
-                throw new PepeExceptions("Add an Event pepe.task.Task: event <pepe.task-name> " +
+                throw new PepeExceptions("Add an Event Task: event <task-name> " +
                         "/from <start-time> " +
                         "/to <end-time> (In the format: yyyy-mm-dd)");
             }
@@ -82,11 +82,11 @@ public class Parser {
                 Task task = new Deadlines(taskName, deadline);
                 return new DeadlineCommand(task);
             } else {
-                throw new PepeExceptions("Add a Deadline pepe.task.Task: deadline <pepe.task-name> " +
+                throw new PepeExceptions("Add a Deadline Task: deadline <task-name> " +
                         "/by <deadline> (In the format: yyyy-mm-dd)");
             }
         default:
-            throw new PepeExceptions("Invalid pepe.command.Command!");
+            throw new PepeExceptions("Invalid Command!");
         }
     }
 }
