@@ -3,7 +3,16 @@ package pepe.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import pepe.command.*;
+import pepe.command.Command;
+import pepe.command.DeadlineCommand;
+import pepe.command.DeleteCommand;
+import pepe.command.EventCommand;
+import pepe.command.ExitCommand;
+import pepe.command.FindCommand;
+import pepe.command.ListCommand;
+import pepe.command.MarkCommand;
+import pepe.command.TodoCommand;
+import pepe.command.UnmarkCommand;
 import pepe.exception.PepeExceptions;
 import pepe.task.Deadlines;
 import pepe.task.Events;

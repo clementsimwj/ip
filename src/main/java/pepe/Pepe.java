@@ -131,7 +131,8 @@ public class Pepe {
                             throw new pepe.exception.PepeExceptions("There is no pepe.task at index: " + (index + 1));
                         }
                     } else {
-                        throw new pepe.exception.PepeExceptions("To mark a pepe.task: mark <pepe.task-index> (pepe.task-index is a valid number)");
+                        throw new pepe.exception.PepeExceptions("To mark a pepe.task
+                        : mark <pepe.task-index> (pepe.task-index is a valid number)");
                     }
                     break;
                 case "unmark":
@@ -150,7 +151,8 @@ public class Pepe {
                             throw new pepe.exception.PepeExceptions("There is no pepe.task at index: " + (index + 1));
                         }
                     } else {
-                        throw new pepe.exception.PepeExceptions("To unmark a pepe.task: unmark <pepe.task-index> (pepe.task-index is a valid number)");
+                        throw new pepe.exception.PepeExceptions("To unmark a pepe.task
+                            : unmark <pepe.task-index> (pepe.task-index is a valid number)");
                     }
                     break;
                 case "todo":
@@ -184,7 +186,8 @@ public class Pepe {
                         System.out.println(BORDER);
                         pepe.storage.Storage.save(list);
                     } else {
-                        throw new pepe.exception.PepeExceptions("Add a Deadline pepe.task.Task: deadline <pepe.task-name> " +
+                        throw new pepe.exception.PepeExceptions("Add a Deadline pepe.task.Task
+                        : deadline <pepe.task-name> " +
                                 "/by <deadline> (In the format: yyyy-mm-dd)");
                     }
                     break;
@@ -204,7 +207,8 @@ public class Pepe {
                         System.out.println(BORDER);
                         pepe.storage.Storage.save(list);
                     } else {
-                        throw new pepe.exception.PepeExceptions("Add an Event pepe.task.Task: event <pepe.task-name> " +
+                        throw new pepe.exception.PepeExceptions("Add an Event pepe.task.Task
+                            : event <pepe.task-name> " +
                                 "/from <start-time> " +
                                 "/to <end-time> (In the format: yyyy-mm-dd)");
                     }
@@ -226,7 +230,8 @@ public class Pepe {
                             throw new pepe.exception.PepeExceptions("There is no pepe.task at index: " + (index + 1));
                         }
                     } else {
-                        throw new pepe.exception.PepeExceptions("To delete a pepe.task: delete <pepe.task-index> (pepe.task-index is a valid number)");
+                        throw new pepe.exception.PepeExceptions("To delete a pepe.task
+                            : delete <pepe.task-index> (pepe.task-index is a valid number)");
                     }
                     break;
                 default:
