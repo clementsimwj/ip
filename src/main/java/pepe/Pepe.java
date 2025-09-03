@@ -76,6 +76,10 @@ public class Pepe {
         new Pepe("data/tasks.txt").run();
     }
 
+    public String getResponse(String input) {
+        return "Pepe Heard: " + input;
+    }
+
 }
 
 
