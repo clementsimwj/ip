@@ -1,17 +1,19 @@
 .label {
-    -fx-background-color: linear-gradient(to bottom right, #00ffbf, #00ddff);
-    -fx-border-color: #d55e00 #009e73 #cc79a7 #0072b2;
-    -fx-border-width: 2px;
-    -fx-background-radius: 1em 1em 0 1em;
-    -fx-border-radius: 1em 1em 0 1em;
-    -fx-padding: 6px;
-    -fx-border-insets: 0px 7px 0px 7px;
-    -fx-background-insets: 0px 7px 0px 7px;
+    -fx-background-color: #FFD800;
+    -fx-text-fill: black;
+    -fx-padding: 8px 12px;
+    -fx-background-radius: 16px 16px 0 16px;
+    -fx-border-radius: 16px 16px 0 16px;
+    -fx-margin: 0 0 10 0px;
 }
 
 .reply-label {
+    -fx-background-color: #64b5f6;
+    -fx-text-fill: black; /* Text color */
     -fx-background-radius: 1em 1em 1em 0;
     -fx-border-radius: 1em 1em 1em 0;
+    -fx-padding: 6px;
+    -fx-margin: 0 0 0 10px
 }
 
 #displayPicture {
@@ -21,6 +23,7 @@
     /* Change size of image. */
     -fx-scale-x: 1;
     -fx-scale-y: 1;
+    -fx-background-radius: 50%;
 
     /* Rotate image clockwise by degrees. */
     -fx-rotate: 0;

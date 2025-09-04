@@ -51,6 +51,18 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getPepeDialog(response, pepeImage, commandType)
         );
         userInput.clear();
+
+        // If the user types "bye", close the window after 3 seconds
+        if (input.equalsIgnoreCase("bye")) {
+            javafx.animation.PauseTransition delay = new javafx
+                    .animation.PauseTransition(javafx.util.Duration.seconds(3));
+            delay.setOnFinished(event -> {
+                // Get the current stage and close it
+                javafx.stage.Stage stage = (javafx.stage.Stage) dialogContainer.getScene().getWindow();
+                stage.close();
+            });
+            delay.play();
+        }
     }
 }
 

@@ -129,7 +129,12 @@ public class Parser {
                 throw new PepeExceptions("Find a Task: find <task-name>");
             }
         default:
-            throw new PepeExceptions("Invalid Command!");
+            throw new PepeExceptions("These are the commands:\n"
+                    + "Add Tasks: todo, deadline, event\n"
+                    + "Mark/Unmark Tasks: mark, unmark\n"
+                    + "View Tasks: list\n"
+                    + "Delete Task: delete\n"
+                    + "Find task: find\n");
         }
     }
 }

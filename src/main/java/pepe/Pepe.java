@@ -61,8 +61,6 @@ public class Pepe {
                 isExit = c.isExit();
             } catch (PepeExceptions e) {
                 ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
             }
         }
     }
@@ -86,7 +84,7 @@ public class Pepe {
             System.out.println(c.getString());
             return c.getString();
         } catch (PepeExceptions e) {
-            return "Error: " + e.getMessage();
+            return "Yo bro! \n" + e.getMessage();
         }
     }
 

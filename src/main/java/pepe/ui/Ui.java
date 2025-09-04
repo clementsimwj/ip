@@ -13,7 +13,6 @@ import pepe.task.tasklist.TaskList;
  * and print the state of tasks and task lists in a user-friendly format.
  */
 public class Ui {
-    private final String BORDER = "____________________________________________________________\n";
     private Scanner scanner = new Scanner(System.in);
 
 
@@ -27,19 +26,13 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    /**
-     * Prints a horizontal border line for UI separation.
-     */
-    public void showLine() {
-        System.out.println(BORDER);
-    }
 
     /**
      * Displays the greeting message when the application starts.
      */
     public String uiGreetUser() {
         String message = "Hello, I am pepe.Pepe!\nHow may I help you today?\n";
-        return (BORDER + message + BORDER);
+        return message;
     }
 
     /**
@@ -47,7 +40,7 @@ public class Ui {
      */
     public String uiSayBye() {
         String message = "Aww...so sad to see you leave! :(\n";
-        return (BORDER + message + BORDER);
+        return message;
     }
 
     /**
@@ -56,16 +49,16 @@ public class Ui {
      * @param taskList the TaskList containing tasks to display
      */
     public String uiListTask(TaskList taskList) {
-        StringBuilder message = new StringBuilder();
+        String message = "";
         if (taskList.isEmpty()) {
-            message = new StringBuilder("Your pepe.task.Task List is Empty...\n");
+            message = "Your Task List is Empty...\n";
         } else {
             for (int i = 0; i < taskList.size(); i++) {
                 String task = (i + 1) + ". " + taskList.get(i) + "\n";
-                message.append(task);
+                message = message + task;
             }
         }
-        return (BORDER + message + BORDER);
+        return message;
     }
 
     /**
@@ -74,10 +67,10 @@ public class Ui {
      * @param task the Task that was marked
      */
     public String uiMark(Task task) {
-        String message = "Nice! I've marked this pepe.task as done:\n";
+        String message = "Nice! I've marked this task as done:\n";
         String taskMessage = task.toString() + "\n";
         message = message + taskMessage;
-        return (BORDER + message + BORDER);
+        return message;
     }
 
     /**
@@ -86,10 +79,10 @@ public class Ui {
      * @param task the Task that was unmarked
      */
     public String uiUnmark(Task task) {
-        String message = "OK, I've marked this pepe.task as not done yet:\n";
+        String message = "OK, I've marked this task as not done yet:\n";
         String taskMessage = task.toString() + "\n";
         message = message + taskMessage;
-        return (BORDER + message + BORDER);
+        return message;
     }
 
     /**
@@ -99,9 +92,9 @@ public class Ui {
      * @param task the Task that was added
      */
     public String uiAddToDo(TaskList list, Task task) {
-        String message = "Got it. I've added this pepe.task:\n";
+        String message = "Got it. I've added this task:\n";
         message = message + (task.toString() + "\n") + "Now you have " + list.size() + " tasks in the list\n";
-        return (BORDER + message + BORDER);
+        return message;
     }
 
     /**
@@ -111,9 +104,9 @@ public class Ui {
      * @param task the Task that was added
      */
     public String uiAddDeadline(TaskList list, Task task) {
-        String message = "Got it. I've added this pepe.task:\n";
+        String message = "Got it. I've added this task:\n";
         message = message + (task.toString() + "\n") + "Now you have " + list.size() + " tasks in the list\n";
-        return (BORDER + message + BORDER);
+        return message;
     }
 
     /**
@@ -123,9 +116,9 @@ public class Ui {
      * @param task the Task that was added
      */
     public String uiAddEvent(TaskList list, Task task) {
-        String message = "Got it. I've added this pepe.task:\n";
+        String message = "Got it. I've added this task:\n";
         message = message + (task.toString() + "\n") + "Now you have " + list.size() + " tasks in the list\n";
-        return (BORDER + message + BORDER);
+        return message;
     }
 
     /**
@@ -137,7 +130,7 @@ public class Ui {
     public String uiDelete(TaskList list, Task task) {
         String message = "Noted. I've removed this task:\n";
         message = message + (task.toString() + "\n") + "Now you have " + list.size() + " tasks in the list\n";
-        return (BORDER + message + BORDER);
+        return message;
     }
 
     /**
@@ -146,16 +139,16 @@ public class Ui {
      * @param tasks the TaskList showing matches
      */
     public String uiFind(TaskList tasks) {
-        StringBuilder message = new StringBuilder("Here are the matching tasks according to your search:\n");
+        String message = "Here are the matching tasks according to your search:\n";
         if (tasks.isEmpty()) {
-            message.append("Hmm...it looks the task you want isn't added yet!\n");
+            message = message + "Hmm...it looks the task you want isn't added yet!\n";
         } else {
             for (int i = 0; i < tasks.size(); i++) {
                 String taskMessage = (i + 1) + ". " + tasks.get(i) + "\n";
-                message.append(taskMessage);
+                message = message + taskMessage;
             }
         }
-        return (BORDER + message + BORDER);
+        return message;
     }
 
     /**

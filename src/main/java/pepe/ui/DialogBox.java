@@ -51,42 +51,9 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    private void changeDialogStyle(String commandType) {
-        switch(commandType) {
-        case "deadlineCommand":
-            dialog.getStyleClass().add("add-label");
-            break;
-        case "deleteCommand":
-            dialog.getStyleClass().add("marked-label");
-            break;
-        case "eventCommand":
-            dialog.getStyleClass().add("delete-label");
-            break;
-        case "exitCommand":
-            dialog.getStyleClass().add("delete-label");
-            break;
-        case "findCommand":
-            dialog.getStyleClass().add("delete-label");
-            break;
-        case "listCommand":
-            dialog.getStyleClass().add("delete-label");
-            break;
-        case "markCommand":
-            dialog.getStyleClass().add("delete-label");
-            break;
-        case "todoCommand":
-            dialog.getStyleClass().add("delete-label");
-            break;
-        case "unmarkCommand":
-            dialog.getStyleClass().add("delete-label");
-            break;
-        default:
-            // Do nothing
-            break;
-        }
+        DialogBox db = new DialogBox(text, img);
+        db.dialog.getStyleClass().add("label");
+        return db;
     }
 
     public static DialogBox getPepeDialog(String text, Image img, String commandType) {
