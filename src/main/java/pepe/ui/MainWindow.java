@@ -44,24 +44,30 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = pepe.getResponse(input);
-        String commandType = pepe.getCommandType();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getPepeDialog(response, pepeImage, commandType)
-        );
-        userInput.clear();
 
-        // If the user types "bye", close the window after 3 seconds
-        if (input.equalsIgnoreCase("bye")) {
-            javafx.animation.PauseTransition delay = new javafx
-                    .animation.PauseTransition(javafx.util.Duration.seconds(3));
-            delay.setOnFinished(event -> {
-                // Get the current stage and close it
-                javafx.stage.Stage stage = (javafx.stage.Stage) dialogContainer.getScene().getWindow();
-                stage.close();
-            });
-            delay.play();
+        if (input.isEmpty()) {
+            // Optionally show a warning or just ignore
+            return; // do nothing if input is empty
+        } else {
+            String response = pepe.getResponse(input);
+            String commandType = pepe.getCommandType();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getPepeDialog(response, pepeImage, commandType)
+            );
+            userInput.clear();
+
+            // If the user types "bye", close the window after 3 seconds
+            if (input.equalsIgnoreCase("bye")) {
+                javafx.animation.PauseTransition delay = new javafx
+                        .animation.PauseTransition(javafx.util.Duration.seconds(3));
+                delay.setOnFinished(event -> {
+                    // Get the current stage and close it
+                    javafx.stage.Stage stage = (javafx.stage.Stage) dialogContainer.getScene().getWindow();
+                    stage.close();
+                });
+                delay.play();
+            }
         }
     }
 }
