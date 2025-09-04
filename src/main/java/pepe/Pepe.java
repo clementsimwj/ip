@@ -23,6 +23,8 @@ public class Pepe {
     private TaskList tasks;
     private final Ui ui;
 
+    private String commandType;
+
     /**
      * Constructs a new Pepe application instance with the given storage file path.
      * <p>
@@ -49,7 +51,7 @@ public class Pepe {
      * corresponding command, and updates the task list until the user exits.
      */
     public void run() {
-        ui.uiGreet();
+        ui.uiGreetUser();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -77,7 +79,19 @@ public class Pepe {
     }
 
     public String getResponse(String input) {
-        return "Pepe Heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            commandType = c.getClass().getSimpleName();
+            System.out.println(c.getString());
+            return c.getString();
+        } catch (PepeExceptions e) {
+            return "Error: " + e.getMessage();
+        }
+    }
+
+    public String getCommandType() {
+        return commandType;
     }
 
 }

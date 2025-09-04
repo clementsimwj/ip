@@ -45,9 +45,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = pepe.getResponse(input);
+        String commandType = pepe.getCommandType();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getPepeDialog(response, pepeImage)
+                DialogBox.getPepeDialog(response, pepeImage, commandType)
         );
         userInput.clear();
     }

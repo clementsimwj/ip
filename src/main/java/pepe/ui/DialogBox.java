@@ -24,6 +24,7 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -46,13 +47,49 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialog.getStyleClass().add("reply-label");
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getPepeDialog(String text, Image img) {
+    private void changeDialogStyle(String commandType) {
+        switch(commandType) {
+        case "deadlineCommand":
+            dialog.getStyleClass().add("add-label");
+            break;
+        case "deleteCommand":
+            dialog.getStyleClass().add("marked-label");
+            break;
+        case "eventCommand":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        case "exitCommand":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        case "findCommand":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        case "listCommand":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        case "markCommand":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        case "todoCommand":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        case "unmarkCommand":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        default:
+            // Do nothing
+            break;
+        }
+    }
+
+    public static DialogBox getPepeDialog(String text, Image img, String commandType) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

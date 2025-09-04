@@ -46,7 +46,7 @@ public class MarkCommand extends Command {
             if (index >= 0 && index < tasks.size()) {
                 Task task = tasks.get(index);
                 task.markTask();
-                ui.uiMark(task);
+                super.setResponse(ui.uiMark(task));
             } else {
                 throw new PepeExceptions("There is no task at index: " + (index + 1));
             }

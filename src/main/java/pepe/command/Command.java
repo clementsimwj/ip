@@ -12,6 +12,7 @@ import pepe.ui.Ui;
  * Commands can optionally signal the application to exit by overriding isExit().
  */
 public abstract class Command {
+    private String response;
 
     /**
      * Executes the command.
@@ -30,6 +31,14 @@ public abstract class Command {
      */
     public boolean isExit() {
         return false;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public String getString() {
+        return this.response;
     }
 }
 

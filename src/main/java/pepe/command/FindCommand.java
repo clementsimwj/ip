@@ -22,7 +22,7 @@ public class FindCommand extends Command{
                 output.addTask(task);
             }
         }
-        ui.uiFind(output);
+        super.setResponse(ui.uiFind(output));
     }
 
 }

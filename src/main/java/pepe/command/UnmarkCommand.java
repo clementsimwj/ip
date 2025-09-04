@@ -45,7 +45,7 @@ public class UnmarkCommand extends Command {
             if (index >= 0 && index < tasks.size()) {
                 Task task = tasks.get(index);
                 task.unmarkTask();
-                ui.uiUnmark(task);
+                super.setResponse(ui.uiUnmark(task));
             } else {
                 throw new PepeExceptions("There is no task at index: " + (index + 1));
             }

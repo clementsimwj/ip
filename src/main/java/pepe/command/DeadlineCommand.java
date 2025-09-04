@@ -42,7 +42,7 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         try {
             tasks.addTask(this.task);
-            ui.uiDeadline(tasks, this.task);
+            super.setResponse(ui.uiAddDeadline(tasks, this.task));
             storage.save(tasks);
         } catch (IOException e) {
             throw new PepeExceptions(
@@ -50,4 +50,5 @@ public class DeadlineCommand extends Command {
             );
         }
     }
+
 }

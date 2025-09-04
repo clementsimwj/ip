@@ -55,7 +55,7 @@ public class Parser {
      * @return a Command object representing the action to be executed
      * @throws PepeExceptions if the input does not match any valid command format
      */
-    public static Command parse(String input) throws PepeExceptions{
+    public static Command parse(String input) throws PepeExceptions {
         String command = input.split(" ", 2)[0].toLowerCase();
 
         switch (command) {

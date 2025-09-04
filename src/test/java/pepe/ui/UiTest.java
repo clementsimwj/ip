@@ -37,7 +37,7 @@ class UiTest {
 
     @Test
     void testUiGreet() {
-        ui.uiGreet();
+        ui.uiGreetUser();
         String output = outContent.toString();
         assertTrue(output.contains("Hello, I am pepe.Pepe!"));
         assertTrue(output.contains("How may I help you today?"));
@@ -45,7 +45,7 @@ class UiTest {
 
     @Test
     void testUiBye() {
-        ui.uiBye();
+        ui.uiSayBye();
         String output = outContent.toString();
         assertTrue(output.contains("Aww...so sad to see you leave! :("));
     }
@@ -53,7 +53,7 @@ class UiTest {
     @Test
     void testUiListEmpty() {
         TaskList list = new TaskList();
-        ui.uiList(list);
+        ui.uiListTask(list);
         String output = outContent.toString();
         assertTrue(output.contains("Your pepe.task.Task List is Empty..."));
     }

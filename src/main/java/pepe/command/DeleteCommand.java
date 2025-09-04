@@ -41,7 +41,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         try {
             if (index >= 0 && index < tasks.size()) {
-                ui.uiDelete(tasks, tasks.deleteTask(index));
+                super.setResponse(ui.uiDelete(tasks, tasks.deleteTask(index)));
             } else {
                 throw new PepeExceptions("There is no task at index: " + (index + 1));
             }
@@ -50,4 +50,5 @@ public class DeleteCommand extends Command {
             throw new PepeExceptions("Error saving file: " + e.getMessage());
         }
     }
+
 }
