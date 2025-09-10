@@ -1,5 +1,7 @@
 package pepe.task.tasklist;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.ArrayList;
 
 import pepe.task.Task;
@@ -84,6 +86,22 @@ public class TaskList {
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
+    }
+
+    /**
+     * Searches for tasks whose names contain the given keyword.
+     * <p>
+     * This method does not modify the original task list. It returns a new
+     * {@link TaskList} containing only the tasks that match the search criterion.
+     *
+     * @param taskName the keyword to search for in task names
+     * @return a new {@link TaskList} containing tasks whose names contain {@code taskName}
+     */
+    public TaskList findTask(String taskName) {
+        return new TaskList(this.taskList.stream()
+                .filter(task -> task.getName().contains(taskName))
+                .collect(Collectors.toCollection(ArrayList::new))
+        );
     }
 
 }

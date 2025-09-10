@@ -22,13 +22,7 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
-        TaskList output = new TaskList();
-
-        for (Task task : tasks.getTaskList()) {
-            if (task.getName().contains(taskName)) {
-                output.addTask(task);
-            }
-        }
+        TaskList output = tasks.findTask(taskName);
         super.setResponse(ui.uiFind(output));
     }
 
