@@ -49,13 +49,16 @@ public class Ui {
      * @param taskList the TaskList containing tasks to display
      */
     public String uiListTask(TaskList taskList) {
+        assert taskList != null : "TaskList should not be null when listing tasks";
         String message = "";
         if (taskList.isEmpty()) {
             message = "Your Task List is Empty...\n";
         } else {
             for (int i = 0; i < taskList.size(); i++) {
-                String task = (i + 1) + ". " + taskList.get(i) + "\n";
-                message = message + task;
+                Task task = taskList.get(i);
+                assert task != null : "Task at index " + i + " should not be null";
+                String taskMessage = (i + 1) + ". " + task + "\n";
+                message = message + taskMessage;
             }
         }
         return message;
@@ -67,6 +70,7 @@ public class Ui {
      * @param task the Task that was marked
      */
     public String uiMark(Task task) {
+        assert task != null : "Task to mark should not be null";
         String message = "Nice! I've marked this task as done:\n";
         String taskMessage = task.toString() + "\n";
         message = message + taskMessage;
@@ -79,6 +83,7 @@ public class Ui {
      * @param task the Task that was unmarked
      */
     public String uiUnmark(Task task) {
+        assert task != null : "Task to unmark should not be null";
         String message = "OK, I've marked this task as not done yet:\n";
         String taskMessage = task.toString() + "\n";
         message = message + taskMessage;
@@ -92,6 +97,8 @@ public class Ui {
      * @param task the Task that was added
      */
     public String uiAddToDo(TaskList list, Task task) {
+        assert list != null : "TaskList should not be null when adding ToDo";
+        assert task != null : "Task to add should not be null";
         String message = "Got it. I've added this task:\n";
         message = message + (task.toString() + "\n") + "Now you have " + list.size() + " tasks in the list\n";
         return message;
@@ -104,6 +111,8 @@ public class Ui {
      * @param task the Task that was added
      */
     public String uiAddDeadline(TaskList list, Task task) {
+        assert list != null : "TaskList should not be null when adding Deadline";
+        assert task != null : "Task to add should not be null";
         String message = "Got it. I've added this task:\n";
         message = message + (task.toString() + "\n") + "Now you have " + list.size() + " tasks in the list\n";
         return message;
@@ -116,6 +125,8 @@ public class Ui {
      * @param task the Task that was added
      */
     public String uiAddEvent(TaskList list, Task task) {
+        assert list != null : "TaskList should not be null when adding Event";
+        assert task != null : "Task to add should not be null";
         String message = "Got it. I've added this task:\n";
         message = message + (task.toString() + "\n") + "Now you have " + list.size() + " tasks in the list\n";
         return message;
@@ -128,6 +139,8 @@ public class Ui {
      * @param task the Task that was removed
      */
     public String uiDelete(TaskList list, Task task) {
+        assert list != null : "TaskList should not be null when deleting";
+        assert task != null : "Task to delete should not be null";
         String message = "Noted. I've removed this task:\n";
         message = message + (task.toString() + "\n") + "Now you have " + list.size() + " tasks in the list\n";
         return message;
@@ -139,6 +152,7 @@ public class Ui {
      * @param tasks the TaskList showing matches
      */
     public String uiFind(TaskList tasks) {
+        assert tasks != null : "TaskList should not be null when finding tasks";
         String message = "Here are the matching tasks according to your search:\n";
         if (tasks.isEmpty()) {
             message = message + "Hmm...it looks the task you want isn't added yet!\n";

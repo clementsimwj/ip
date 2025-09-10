@@ -123,6 +123,7 @@ public class Storage {
      * @throws IOException if there is an error writing to the file
      */
     public void save(TaskList tasks) throws IOException {
+        assert tasks != null : "TaskList object should never be null";
         FileWriter fileWriter = new FileWriter(this.filePath);
         try {
             for (Task task : tasks.getTaskList()) {
@@ -144,6 +145,7 @@ public class Storage {
      * @return the date string in yyyy-MM-dd format
      */
     public String rawDateToString(String rawDate) {
+        assert rawDate != null && !rawDate.isBlank() : "Raw date string should not be null or empty";
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         LocalDate date = LocalDate.parse(rawDate, inputFormatter);
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

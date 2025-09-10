@@ -25,6 +25,8 @@ public class Deadlines extends Task {
      */
     public Deadlines(String name, String dateline) throws PepeExceptions {
         super(name);
+        assert name != null && !name.isBlank() : "Task name should not be null or empty";
+        assert dateline != null && !dateline.isBlank() : "Dateline should not be null or empty";
         try {
             this.date = LocalDate.parse(dateline);
             this.dateline = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -44,6 +46,7 @@ public class Deadlines extends Task {
     public boolean isDueNextWeek() {
         LocalDate today = LocalDate.now();
         LocalDate nextWeek = today.plusWeeks(1);
+        assert date != null : "Date should never be null when checking due week";
         return ((this.date.isAfter(today) || this.date.isEqual(today)) && this.date.isBefore(nextWeek));
     }
 
@@ -68,6 +71,7 @@ public class Deadlines extends Task {
      */
     @Override
     public String toFileFormat() {
+        assert dateline != null && !dateline.isBlank() : "Dateline should be non-null and non-empty for file format";
         return "D" + " | " + super.isMarked() + " | " + super.getName() + " | " + this.dateline;
     }
 }
