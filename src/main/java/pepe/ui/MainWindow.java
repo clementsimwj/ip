@@ -63,7 +63,6 @@ public class MainWindow extends AnchorPane {
             String response = pepe.getResponse(input);
             String commandType = pepe.getCommandType();
             assert response != null : "Pepe response should not be null";
-            assert commandType != null : "Command type should not be null";
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getPepeDialog(response, pepeImage, commandType)

@@ -14,6 +14,10 @@ application {
     mainClass.set("pepe.ui.Launcher")
 }
 
+tasks.withType(JavaExec) {
+    jvmArgs += "-ea"
+}
+
 shadowJar {
     archiveFileName = 'pepe.jar'
 }
