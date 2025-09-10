@@ -25,10 +25,17 @@ public abstract class Task {
     }
 
     /**
+     * Checks if the task is due next week.
+     * <p>
+     * Must be implemented by subclasses to provide task-specific logic.
+     *
+     * @return true if the task is due next week, false otherwise
+     */
+    public abstract boolean isDueNextWeek();
+    /**
      * Marks the task as done.
      */
-    public void markTask(){
-
+    public void markTask() {
         this.marked = true;
     }
 
@@ -60,15 +67,6 @@ public abstract class Task {
     }
 
     /**
-     * Checks if the task is due next week.
-     * <p>
-     * Must be implemented by subclasses to provide task-specific logic.
-     *
-     * @return true if the task is due next week, false otherwise
-     */
-    abstract public boolean isDueNextWeek();
-
-    /**
      * Returns a string representation of the task for display.
      * <p>
      * Format: [X] taskName if marked, [ ] taskName if unmarked.
@@ -88,5 +86,5 @@ public abstract class Task {
      *
      * @return the task formatted for saving to a file
      */
-    abstract public String toFileFormat();
+    public abstract String toFileFormat();
 }
