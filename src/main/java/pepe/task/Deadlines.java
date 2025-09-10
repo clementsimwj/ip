@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
 import pepe.exception.PepeExceptions;
 
 /**
@@ -57,7 +56,7 @@ public class Deadlines extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dateline +")";
+        return "[D]" + super.toString() + " (by: " + dateline + ")";
     }
 
     /**
@@ -69,6 +68,6 @@ public class Deadlines extends Task {
      */
     @Override
     public String toFileFormat() {
-        return "D" + " | " + super.isMarked() +" | " + super.getName() + " | " + this.dateline;
+        return "D" + " | " + super.isMarked() + " | " + super.getName() + " | " + this.dateline;
     }
 }

@@ -1,21 +1,22 @@
 package pepe.storage;
 
-import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import pepe.exception.PepeExceptions;
 import pepe.task.Deadlines;
 import pepe.task.Events;
 import pepe.task.Task;
 import pepe.task.ToDos;
 import pepe.task.tasklist.TaskList;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class StorageTest {
 

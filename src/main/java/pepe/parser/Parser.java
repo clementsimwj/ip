@@ -29,8 +29,10 @@ public class Parser {
 
     //Regex Patterns
     private static final Pattern TODO_PATTERN = Pattern.compile("^todo\\s+(.+)$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern EVENT_PATTERN = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$",
+            Pattern.CASE_INSENSITIVE);
+    private static final Pattern EVENT_PATTERN = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$",
+            Pattern.CASE_INSENSITIVE);
     private static final Pattern MARK_PATTERN = Pattern.compile("^mark\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern UNMARK_PATTERN = Pattern.compile("^unmark\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern DELETE_PATTERN = Pattern.compile("^delete\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
@@ -105,9 +107,9 @@ public class Parser {
                 Task task = new Events(taskName, startTime, endTime);
                 return new EventCommand(task);
             } else {
-                throw new PepeExceptions("Add an Event Task: event <task-name> " +
-                        "/from <start-time> " +
-                        "/to <end-time> (In the format: yyyy-mm-dd)");
+                throw new PepeExceptions("Add an Event Task: event <task-name> "
+                        + "/from <start-time> "
+                        + "/to <end-time> (In the format: yyyy-mm-dd)");
             }
         case "deadline":
             Matcher deadlineMatcher = DEADLINE_PATTERN.matcher(input);
@@ -117,8 +119,8 @@ public class Parser {
                 Task task = new Deadlines(taskName, deadline);
                 return new DeadlineCommand(task);
             } else {
-                throw new PepeExceptions("Add a Deadline Task: deadline <task-name> " +
-                        "/by <deadline> (In the format: yyyy-mm-dd)");
+                throw new PepeExceptions("Add a Deadline Task: deadline <task-name> "
+                        + "/by <deadline> (In the format: yyyy-mm-dd)");
             }
         case "find":
             Matcher findMatcher = FIND_PATTERN.matcher(input);

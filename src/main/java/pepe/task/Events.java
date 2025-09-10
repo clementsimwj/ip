@@ -79,6 +79,6 @@ public class Events extends Task {
      */
     @Override
     public String toFileFormat() {
-        return "E" + " | " + super.isMarked() +" | " + super.getName() + " | " + this.startTime + " - " + this.endTime;
+        return "E" + " | " + super.isMarked() + " | " + super.getName() + " | " + this.startTime + " - " + this.endTime;
     }
 }

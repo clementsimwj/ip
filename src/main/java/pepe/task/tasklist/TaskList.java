@@ -12,7 +12,7 @@ import pepe.task.Task;
  */
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     /**
      * Constructs a TaskList initialized with an existing list of tasks.

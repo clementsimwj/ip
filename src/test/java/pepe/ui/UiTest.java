@@ -1,15 +1,17 @@
 package pepe.ui;
 
-import org.junit.jupiter.api.*;
-import pepe.task.Task;
-import pepe.task.ToDos;
-import pepe.task.tasklist.TaskList;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import pepe.task.Task;
+import pepe.task.ToDos;
+import pepe.task.tasklist.TaskList;
 
 class UiTest {
 
@@ -28,51 +30,39 @@ class UiTest {
         System.setOut(originalOut);
     }
 
-    @Test
-    void testShowLine() {
-        ui.showLine();
-        String output = outContent.toString();
-        assertTrue(output.contains("____________________________________________________________"));
-    }
 
     @Test
     void testUiGreet() {
-        ui.uiGreetUser();
-        String output = outContent.toString();
-        assertTrue(output.contains("Hello, I am pepe.Pepe!"));
-        assertTrue(output.contains("How may I help you today?"));
+        String output = ui.uiGreetUser();
+        assertTrue(output.contains("Hello, I am pepe.Pepe!\nHow may I help you today?\n"));
     }
 
     @Test
     void testUiBye() {
-        ui.uiSayBye();
-        String output = outContent.toString();
+        String output = ui.uiSayBye();
         assertTrue(output.contains("Aww...so sad to see you leave! :("));
     }
 
     @Test
     void testUiListEmpty() {
         TaskList list = new TaskList();
-        ui.uiListTask(list);
-        String output = outContent.toString();
-        assertTrue(output.contains("Your pepe.task.Task List is Empty..."));
+        String output = ui.uiListTask(list);
+        assertTrue(output.contains("Your Task List is Empty..."));
     }
 
     @Test
     void testUiMark() {
         Task task = new ToDos("Test task");
-        ui.uiMark(task);
-        String output = outContent.toString();
-        assertTrue(output.contains("Nice! I've marked this pepe.task as done:"));
+        String output = ui.uiMark(task);
+        assertTrue(output.contains("Nice! I've marked this task as done:"));
         assertTrue(output.contains("Test task"));
     }
 
     @Test
     void testUiUnmark() {
         Task task = new ToDos("Test task");
-        ui.uiUnmark(task);
-        String output = outContent.toString();
-        assertTrue(output.contains("OK, I've marked this pepe.task as not done yet:"));
+        String output = ui.uiUnmark(task);
+        assertTrue(output.contains("OK, I've marked this task as not done yet:"));
         assertTrue(output.contains("Test task"));
     }
 
@@ -81,17 +71,9 @@ class UiTest {
         Task task = new ToDos("Test task");
         TaskList list = new TaskList();
         list.addTask(task);
-        ui.uiToDo(list, task);
-        String output = outContent.toString();
-        assertTrue(output.contains("Got it. I've added this pepe.task:"));
+        String output = ui.uiAddToDo(list, task);
+        assertTrue(output.contains("Got it. I've added this task:"));
         assertTrue(output.contains("Test task"));
         assertTrue(output.contains("Now you have 1 tasks in the list"));
-    }
-
-    @Test
-    void testShowError() {
-        ui.showError("Error message");
-        String output = outContent.toString();
-        assertTrue(output.contains("Error message"));
     }
 }

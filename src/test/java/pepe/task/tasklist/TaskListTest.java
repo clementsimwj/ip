@@ -1,14 +1,17 @@
 package pepe.task.tasklist;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import pepe.task.Task;
-import pepe.task.ToDos;
-import pepe.exception.PepeExceptions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import pepe.exception.PepeExceptions;
+import pepe.task.Task;
+import pepe.task.ToDos;
 
 class TaskListTest {
 

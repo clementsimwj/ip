@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -82,7 +80,7 @@ public class Storage {
                     }
                     break;
                 case "E":
-                    String time= parts[3].trim();
+                    String time = parts[3].trim();
                     String[] fromAndTo = time.split("-");
                     String from = rawDateToString(fromAndTo[0].trim());
                     String to = rawDateToString(fromAndTo[1].trim());
