@@ -66,70 +66,19 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "mark":
-            Matcher markMatcher = MARK_PATTERN.matcher(input);
-            if (markMatcher.matches()) {
-                int index = Integer.parseInt(markMatcher.group(1)) - 1;
-                return new MarkCommand(index);
-            } else {
-                throw new PepeExceptions("To mark a task: mark <task-index> (task-index is a valid number)");
-            }
+            return parseMarkCommand(input);
         case "unmark":
-            Matcher unmarkMatcher = UNMARK_PATTERN.matcher(input);
-            if (unmarkMatcher.matches()) {
-                int index = Integer.parseInt(unmarkMatcher.group(1)) - 1;
-                return new UnmarkCommand(index);
-            } else {
-                throw new PepeExceptions("To unmark a task: unmark <task-index> (task-index is a valid number)");
-            }
+            return parseUnmarkCommand(input);
         case "delete":
-            Matcher deleteMatcher = DELETE_PATTERN.matcher(input);
-            if (deleteMatcher.matches()) {
-                int index = Integer.parseInt(deleteMatcher.group(1)) - 1;
-                return new DeleteCommand(index);
-            } else {
-                throw new PepeExceptions("To delete a task: delete <task-index> (task-index is a valid number)");
-            }
+            return parseDeleteCommand(input);
         case "todo":
-            Matcher todoMatcher = TODO_PATTERN.matcher(input);
-            if (todoMatcher.matches()) {
-                String taskName = todoMatcher.group(1);
-                Task task = new ToDos(taskName);
-                return new TodoCommand(task);
-            } else {
-                throw new PepeExceptions("Add a ToDo task: todo <task-name>");
-            }
+            return parseToDoCommand(input);
         case "event":
-            Matcher eventMatcher = EVENT_PATTERN.matcher(input);
-            if (eventMatcher.matches()) {
-                String taskName = eventMatcher.group(1);
-                String startTime = eventMatcher.group(2);
-                String endTime = eventMatcher.group(3);
-                Task task = new Events(taskName, startTime, endTime);
-                return new EventCommand(task);
-            } else {
-                throw new PepeExceptions("Add an Event Task: event <task-name> "
-                        + "/from <start-time> "
-                        + "/to <end-time> (In the format: yyyy-mm-dd)");
-            }
+            return parseEventCommand(input);
         case "deadline":
-            Matcher deadlineMatcher = DEADLINE_PATTERN.matcher(input);
-            if (deadlineMatcher.matches()) {
-                String taskName = deadlineMatcher.group(1);
-                String deadline = deadlineMatcher.group(2);
-                Task task = new Deadlines(taskName, deadline);
-                return new DeadlineCommand(task);
-            } else {
-                throw new PepeExceptions("Add a Deadline Task: deadline <task-name> "
-                        + "/by <deadline> (In the format: yyyy-mm-dd)");
-            }
+            return parseDeadlineCommand(input);
         case "find":
-            Matcher findMatcher = FIND_PATTERN.matcher(input);
-            if (findMatcher.matches()) {
-                String taskName = findMatcher.group(1);
-                return new FindCommand(taskName);
-            } else {
-                throw new PepeExceptions("Find a Task: find <task-name>");
-            }
+            return parseFindCommand(input);
         default:
             throw new PepeExceptions("These are the commands:\n"
                     + "Add Tasks: todo, deadline, event\n"
@@ -137,6 +86,128 @@ public class Parser {
                     + "View Tasks: list\n"
                     + "Delete Task: delete\n"
                     + "Find task: find\n");
+        }
+
+    }
+    /**
+     * Parses a 'mark' command.
+     *
+     * @param input user input string
+     * @return MarkCommand object with task index
+     * @throws PepeExceptions if format is invalid
+     */
+    private static Command parseMarkCommand(String input) throws PepeExceptions {
+        Matcher markMatcher = MARK_PATTERN.matcher(input);
+        if (markMatcher.matches()) {
+            int index = Integer.parseInt(markMatcher.group(1)) - 1;
+            return new MarkCommand(index);
+        } else {
+            throw new PepeExceptions("To mark a task: mark <task-index> (task-index is a valid number)");
+        }
+    }
+    /**
+     * Parses a 'unmark' command.
+     *
+     * @param input user input string
+     * @return UnmarkCommand object with task index
+     * @throws PepeExceptions if format is invalid
+     */
+    private static Command parseUnmarkCommand(String input) throws PepeExceptions {
+        Matcher unmarkMatcher = UNMARK_PATTERN.matcher(input);
+        if (unmarkMatcher.matches()) {
+            int index = Integer.parseInt(unmarkMatcher.group(1)) - 1;
+            return new UnmarkCommand(index);
+        } else {
+            throw new PepeExceptions("To unmark a task: unmark <task-index> (task-index is a valid number)");
+        }
+    }
+    /**
+     * Parses a 'delete' command.
+     *
+     * @param input user input string
+     * @return DeleteCommand object with task index
+     * @throws PepeExceptions if format is invalid
+     */
+    private static Command parseDeleteCommand(String input) throws PepeExceptions {
+        Matcher deleteMatcher = DELETE_PATTERN.matcher(input);
+        if (deleteMatcher.matches()) {
+            int index = Integer.parseInt(deleteMatcher.group(1)) - 1;
+            return new DeleteCommand(index);
+        } else {
+            throw new PepeExceptions("To delete a task: delete <task-index> (task-index is a valid number)");
+        }
+    }
+    /**
+     * Parses a 'todo' command.
+     *
+     * @param input user input string
+     * @return TodoCommand object with task index
+     * @throws PepeExceptions if format is invalid
+     */
+    private static Command parseToDoCommand(String input) throws PepeExceptions {
+        Matcher todoMatcher = TODO_PATTERN.matcher(input);
+        if (todoMatcher.matches()) {
+            String taskName = todoMatcher.group(1);
+            Task task = new ToDos(taskName);
+            return new TodoCommand(task);
+        } else {
+            throw new PepeExceptions("Add a ToDo task: todo <task-name>");
+        }
+    }
+    /**
+     * Parses an 'event' command.
+     *
+     * @param input user input string
+     * @return EventCommand object with task index
+     * @throws PepeExceptions if format is invalid
+     */
+    private static Command parseEventCommand(String input) throws PepeExceptions {
+        Matcher eventMatcher = EVENT_PATTERN.matcher(input);
+        if (eventMatcher.matches()) {
+            String taskName = eventMatcher.group(1);
+            String startTime = eventMatcher.group(2);
+            String endTime = eventMatcher.group(3);
+            Task task = new Events(taskName, startTime, endTime);
+            return new EventCommand(task);
+        } else {
+            throw new PepeExceptions("Add an Event Task: event <task-name> "
+                    + "/from <start-time> "
+                    + "/to <end-time> (In the format: yyyy-mm-dd)");
+        }
+    }
+    /**
+     * Parses a 'deadline' command.
+     *
+     * @param input user input string
+     * @return DeadlineCommand object with task index
+     * @throws PepeExceptions if format is invalid
+     */
+    private static Command parseDeadlineCommand(String input) throws PepeExceptions {
+        Matcher deadlineMatcher = DEADLINE_PATTERN.matcher(input);
+        if (deadlineMatcher.matches()) {
+            String taskName = deadlineMatcher.group(1);
+            String deadline = deadlineMatcher.group(2);
+            Task task = new Deadlines(taskName, deadline);
+            return new DeadlineCommand(task);
+        } else {
+            throw new PepeExceptions("Add a Deadline Task: deadline <task-name> "
+                    + "/by <deadline> (In the format: yyyy-mm-dd)");
+        }
+    }
+    /**
+     * Parses a 'find' command.
+     *
+     * @param input user input string
+     * @return FindCommand object with task index
+     * @throws PepeExceptions if format is invalid
+     */
+    private static Command parseFindCommand(String input) throws PepeExceptions {
+        Matcher findMatcher = FIND_PATTERN.matcher(input);
+        if (findMatcher.matches()) {
+            String taskName = findMatcher.group(1);
+            return new FindCommand(taskName);
+        } else {
+            throw new PepeExceptions("Find a Task: find <task-name>");
         }
     }
 }
