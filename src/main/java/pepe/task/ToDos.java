@@ -14,6 +14,7 @@ public class ToDos extends Task {
      */
     public ToDos(String name) {
         super(name);
+        assert name != null && !name.isBlank() : "ToDo task name should not be null or empty";
     }
 
     /**
@@ -25,7 +26,8 @@ public class ToDos extends Task {
      */
     @Override
     public String toString() {
-
+        assert super.getName() != null && !super.getName().isBlank()
+                : "ToDo task name should not be null or empty for display";
         return "[T]" + super.toString();
     }
 
@@ -38,6 +40,7 @@ public class ToDos extends Task {
      */
     @Override
     public boolean isDueNextWeek() {
+        //ToDo tasks have no dateline
         return false;
     }
 
@@ -50,6 +53,8 @@ public class ToDos extends Task {
      */
     @Override
     public String toFileFormat() {
+        assert super.getName() != null && !super.getName().isBlank()
+                : "ToDo task name should not be null or empty for file format";
         return "T" + " | " + super.isMarked() + " | " + super.getName();
     }
 }

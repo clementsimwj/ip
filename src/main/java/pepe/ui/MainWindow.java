@@ -27,13 +27,21 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/pepe.png"));
     private Image pepeImage = new Image(this.getClass().getResourceAsStream("/images/pepe_sad.png"));
 
+    /**
+     * Initializes the controller.
+     * Binds the scroll pane to the height of the dialog container and
+     * asserts that user and Pepe images are loaded correctly.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        assert userImage != null : "User image not found at /images/pepe.png";
+        assert pepeImage != null : "Pepe image not found at /images/pepe_sad.png";
     }
 
-    /** Injects the Duke instance */
+    /** Injects the Pepe instance */
     public void setPepe(Pepe pepe) {
+        assert pepe != null : "Pepe instance should not be null";
         this.pepe = pepe;
     }
 
@@ -43,6 +51,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        assert userInput != null : "User input TextField should not be null";
+        assert dialogContainer != null : "Dialog container VBox should not be null";
+        assert pepe != null : "Pepe instance must be set before handling user input";
         String input = userInput.getText();
 
         if (input.isEmpty()) {
@@ -51,6 +62,7 @@ public class MainWindow extends AnchorPane {
         } else {
             String response = pepe.getResponse(input);
             String commandType = pepe.getCommandType();
+            assert response != null : "Pepe response should not be null";
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getPepeDialog(response, pepeImage, commandType)

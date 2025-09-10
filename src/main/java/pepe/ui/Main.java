@@ -20,8 +20,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            assert stage != null : "Stage should not be null";
             stage.setTitle("Pepe Chat");
             Image icon = new Image(getClass().getResourceAsStream("/images/pepe_angry.png"));
+            assert icon != null : "Pepe icon image not found at /images/pepe_angry.png";
             stage.getIcons().add(icon);
             stage.setMinHeight(220);
             stage.setMinWidth(417);

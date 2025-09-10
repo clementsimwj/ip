@@ -14,10 +14,6 @@ import pepe.ui.Ui;
  * handles user input through the Ui, and executes commands using the Parser.
  */
 public class Pepe {
-    //Constants
-    private static final String BORDER = "____________________________________________________________";
-    private static final String FILE_PATH = "./data/tasks.txt";
-
     //Fields
     private final Storage storage;
     private TaskList tasks;
@@ -33,6 +29,7 @@ public class Pepe {
      * @param filePath the path to the storage file for tasks
      */
     public Pepe(String filePath) {
+        assert filePath != null && !filePath.isBlank() : "File path should not be null or empty";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -51,6 +48,8 @@ public class Pepe {
      * corresponding command, and updates the task list until the user exits.
      */
     public void run() {
+        assert ui != null : "UI should not be null before running the main loop";
+        assert tasks != null : "Tasks should not be null before running the main loop";
         ui.uiGreetUser();
         boolean isExit = false;
         while (!isExit) {
@@ -77,6 +76,7 @@ public class Pepe {
     }
 
     public String getResponse(String input) {
+        assert input != null : "Input string should not be null";
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);

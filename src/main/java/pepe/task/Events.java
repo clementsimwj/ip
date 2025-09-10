@@ -28,9 +28,14 @@ public class Events extends Task {
      */
     public Events(String name, String startTime, String endTime) throws PepeExceptions {
         super(name);
+        assert name != null && !name.isBlank() : "Event name should not be null or empty";
+        assert startTime != null && !startTime.isBlank() : "Start time should not be null or empty";
+        assert endTime != null && !endTime.isBlank() : "End time should not be null or empty";
         try {
             this.start = LocalDate.parse(startTime);
             this.end = LocalDate.parse(endTime);
+            assert start != null : "Parsed start LocalDate should not be null";
+            assert end != null : "Parsed end LocalDate should not be null";
             this.startTime = start.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             this.endTime = end.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             if (end.isBefore(LocalDate.now())) {
@@ -52,6 +57,7 @@ public class Events extends Task {
     public boolean isDueNextWeek() {
         LocalDate today = LocalDate.now();
         LocalDate nextWeek = today.plusWeeks(1);
+        assert end != null : "End date should never be null when checking due week";
         return (this.end.isAfter(today) && this.end.isBefore(nextWeek));
     }
 
@@ -65,6 +71,8 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
+        assert startTime != null && !startTime.isBlank() : "Start time should be non-null and non-empty for display";
+        assert endTime != null && !endTime.isBlank() : "End time should be non-null and non-empty for display";
         return "[E]" + super.toString() + " (from: " + startTime + " to: " + endTime + ")";
     }
 
@@ -79,6 +87,8 @@ public class Events extends Task {
      */
     @Override
     public String toFileFormat() {
+        assert startTime != null && !startTime.isBlank() : "Start time should be non-null and non-empty for file format";
+        assert endTime != null && !endTime.isBlank() : "End time should be non-null and non-empty for file format";
         return "E" + " | " + super.isMarked() + " | " + super.getName() + " | " + this.startTime + " - " + this.endTime;
     }
 }
