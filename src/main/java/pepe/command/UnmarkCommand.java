@@ -1,6 +1,7 @@
 package pepe.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import pepe.exception.PepeExceptions;
 import pepe.storage.Storage;
@@ -17,15 +18,15 @@ import pepe.ui.Ui;
  */
 public class UnmarkCommand extends Command {
 
-    private final int index;
+    private final int[] indices;
 
     /**
      * Creates a new UnmarkCommand for the task at the given index.
      *
-     * @param index the zero-based index of the task to unmark
+     * @param indices the zero-based index of the task to unmark
      */
-    public UnmarkCommand(int index) {
-        this.index = index;
+    public UnmarkCommand(int[] indices) {
+        this.indices = indices;
     }
 
     /**
@@ -42,13 +43,19 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         try {
-            if (index >= 0 && index < tasks.size()) {
+            ArrayList<Task> unmarkedTasks = new ArrayList<>();
+            for (int index : indices) {
+                if (index < 0 || index >= tasks.size()) {
+                    throw new PepeExceptions("There is no task at index: " + (index + 1)
+                            + "!\nAborting all Unmarkings...");
+                }
+            }
+            for (int index : indices) {
                 Task task = tasks.get(index);
                 task.unmarkTask();
-                super.setResponse(ui.uiUnmark(task));
-            } else {
-                throw new PepeExceptions("There is no task at index: " + (index + 1));
+                unmarkedTasks.add(task);
             }
+            super.setResponse(ui.uiMark(unmarkedTasks.toArray(new Task[0])));
             storage.save(tasks);
         } catch (IOException e) {
             throw new PepeExceptions("Error saving file: " + e.getMessage());

@@ -1,9 +1,11 @@
 package pepe.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import pepe.exception.PepeExceptions;
 import pepe.storage.Storage;
+import pepe.task.Task;
 import pepe.task.tasklist.TaskList;
 import pepe.ui.Ui;
 
@@ -15,21 +17,21 @@ import pepe.ui.Ui;
  * method to remove the task, update the UI, and save the updated task list.
  */
 public class DeleteCommand extends Command {
-    private final int index;
+    private final int[] indices;
 
     /**
      * Constructs a DeleteCommand with the specified task index.
      *
-     * @param index the 0-based index of the task to delete
+     * @param indices an array of indexes to delete
      */
-    public DeleteCommand(int index) {
-        this.index = index;
+    public DeleteCommand(int[] indices) {
+        this.indices = indices;
     }
 
     /**
      * {@inheritDoc}
      * <p>
-     * Deletes the task at the specified index from the task list, shows a confirmation message
+     * Deletes the tasks at the specified index from the task list, shows a confirmation message
      * via {@link Ui}, and saves the updated task list to {@link Storage}.
      *
      * @param tasks   the task list to delete the task from
@@ -40,11 +42,18 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         try {
-            if (index >= 0 && index < tasks.size()) {
-                super.setResponse(ui.uiDelete(tasks, tasks.deleteTask(index)));
-            } else {
-                throw new PepeExceptions("There is no task at index: " + (index + 1));
+            ArrayList<Task> deletedTasks = new ArrayList<>();
+            for (int index : indices) {
+                if (index < 0 || index >= tasks.size()) {
+                    throw new PepeExceptions("There is no task at index: " + (index + 1) + "!\nAborting Deletion...");
+                }
             }
+            for (int index : indices) {
+                Task deletedTask = tasks.deleteTask(index);
+                deletedTasks.add(deletedTask);
+            }
+            super.setResponse(ui.uiDelete(tasks, deletedTasks.toArray(new Task[0])));
+            tasks.wipe();
             storage.save(tasks);
         } catch (IOException e) {
             throw new PepeExceptions("Error saving file: " + e.getMessage());

@@ -67,26 +67,27 @@ public class Ui {
     /**
      * Displays a message indicating that a task has been marked as done.
      *
-     * @param task the Task that was marked
+     * @param tasks an array of tasks to be marked
      */
-    public String uiMark(Task task) {
-        assert task != null : "Task to mark should not be null";
-        String message = "Nice! I've marked this task as done:\n";
-        String taskMessage = task.toString() + "\n";
-        message = message + taskMessage;
+    public String uiMark(Task ... tasks) {
+        assert tasks != null : "Tasks to mark should not be null";
+        String message = "Nice! I've marked these task(s) as done:\n";
+        for (Task task : tasks) {
+            message += task.toString() + "\n";
+        }
         return message;
     }
-
     /**
      * Displays a message indicating that a task has been unmarked (not done yet).
      *
-     * @param task the Task that was unmarked
+     * @param tasks the Task that was unmarked
      */
-    public String uiUnmark(Task task) {
-        assert task != null : "Task to unmark should not be null";
-        String message = "OK, I've marked this task as not done yet:\n";
-        String taskMessage = task.toString() + "\n";
-        message = message + taskMessage;
+    public String uiUnmark(Task ... tasks) {
+        assert tasks != null : "Task to unmark should not be null";
+        String message = "OK, I've unmarked these task(s) as not done yet:\n";
+        for (Task task : tasks) {
+            message += task.toString() + "\n";
+        }
         return message;
     }
 
@@ -136,13 +137,16 @@ public class Ui {
      * Displays a message after deleting a task from the list.
      *
      * @param list the TaskList after deletion
-     * @param task the Task that was removed
+     * @param tasks the Tasks that were removed
      */
-    public String uiDelete(TaskList list, Task task) {
+    public String uiDelete(TaskList list, Task ... tasks) {
         assert list != null : "TaskList should not be null when deleting";
-        assert task != null : "Task to delete should not be null";
-        String message = "Noted. I've removed this task:\n";
-        message = message + (task.toString() + "\n") + "Now you have " + list.size() + " tasks in the list\n";
+        String message = "Noted. I've removed these task(s):\n";
+        for (Task task : tasks) {
+            message = message + (task.toString() + "\n");
+        }
+        int remaining = list.size() - tasks.length;
+        message += "Now you have " + remaining + " tasks in the list\n";
         return message;
     }
 

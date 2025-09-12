@@ -1,9 +1,9 @@
 package pepe.task.tasklist;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
+import pepe.task.EmptyTask;
 import pepe.task.Task;
 
 
@@ -12,6 +12,7 @@ import pepe.task.Task;
  * <p>
  * Provides methods to add, delete, and access tasks, as well as check list size or emptiness.
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class TaskList {
 
     private final ArrayList<Task> taskList;
@@ -43,14 +44,35 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the list at the specified index.
+     * Sets a task to null from the list at the specified index.
      *
      * @param index the index of the task to delete (0-based)
      * @return the deleted task
      */
     public Task deleteTask(int index) {
         assert index >= 0 && index < taskList.size() : "Index out of bounds for deleteTask: " + index;
-        return taskList.remove(index);
+        Task task = taskList.get(index);
+        taskList.set(index, new EmptyTask());
+        return task;
+    }
+
+    /**
+     * Permanently removes all tasks that have been marked as deleted (or set to {@code null})
+     * from the task list.
+     * <p>
+     * This method should be called after performing deletions to compact the list and ensure
+     * task indices remain consistent. Without calling {@code wipe()}, deleted tasks remain
+     * as placeholders in the list.
+     * <p>
+     * Typical usage:
+     * <pre>
+     *     tasks.delete(1);
+     *     tasks.delete(3);
+     *     tasks.wipe(); //clears the deleted tasks from the list
+     * </pre>
+     */
+    public void wipe() {
+        this.taskList.removeIf(task -> task instanceof EmptyTask);
     }
 
     /**

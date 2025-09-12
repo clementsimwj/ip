@@ -33,9 +33,10 @@ public class Parser {
             Pattern.CASE_INSENSITIVE);
     private static final Pattern EVENT_PATTERN = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$",
             Pattern.CASE_INSENSITIVE);
-    private static final Pattern MARK_PATTERN = Pattern.compile("^mark\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern UNMARK_PATTERN = Pattern.compile("^unmark\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern DELETE_PATTERN = Pattern.compile("^delete\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern MARK_PATTERN = Pattern.compile("^mark\\s+(\\d+(?:\\s+\\d+)*)$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern UNMARK_PATTERN = Pattern.compile("^unmark\\s+(\\d+(?:\\s+\\d+)*)$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern DELETE_PATTERN = Pattern.compile("^delete\\s+(\\d+(?:\\s+\\d+)*)$",
+            Pattern.CASE_INSENSITIVE);
     private static final Pattern FIND_PATTERN = Pattern.compile("^find\\s+(.+)$", Pattern.CASE_INSENSITIVE);
 
     /**
@@ -99,8 +100,12 @@ public class Parser {
     private static Command parseMarkCommand(String input) throws PepeExceptions {
         Matcher markMatcher = MARK_PATTERN.matcher(input);
         if (markMatcher.matches()) {
-            int index = Integer.parseInt(markMatcher.group(1)) - 1;
-            return new MarkCommand(index);
+            String[] parts = markMatcher.group(1).trim().split("\\s+");
+            int[] indices = new int[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                indices[i] = Integer.parseInt(parts[i]) - 1;
+            }
+            return new MarkCommand(indices);
         } else {
             throw new PepeExceptions("To mark a task: mark <task-index> (task-index is a valid number)");
         }
@@ -115,8 +120,12 @@ public class Parser {
     private static Command parseUnmarkCommand(String input) throws PepeExceptions {
         Matcher unmarkMatcher = UNMARK_PATTERN.matcher(input);
         if (unmarkMatcher.matches()) {
-            int index = Integer.parseInt(unmarkMatcher.group(1)) - 1;
-            return new UnmarkCommand(index);
+            String[] parts = unmarkMatcher.group(1).trim().split("\\s+");
+            int[] indices = new int[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                indices[i] = Integer.parseInt(parts[i]) - 1;
+            }
+            return new UnmarkCommand(indices);
         } else {
             throw new PepeExceptions("To unmark a task: unmark <task-index> (task-index is a valid number)");
         }
@@ -131,8 +140,12 @@ public class Parser {
     private static Command parseDeleteCommand(String input) throws PepeExceptions {
         Matcher deleteMatcher = DELETE_PATTERN.matcher(input);
         if (deleteMatcher.matches()) {
-            int index = Integer.parseInt(deleteMatcher.group(1)) - 1;
-            return new DeleteCommand(index);
+            String[] parts = deleteMatcher.group(1).trim().split("\\s+");
+            int[] indices = new int[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                indices[i] = Integer.parseInt(parts[i]) - 1;
+            }
+            return new DeleteCommand(indices);
         } else {
             throw new PepeExceptions("To delete a task: delete <task-index> (task-index is a valid number)");
         }
