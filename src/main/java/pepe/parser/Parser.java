@@ -35,7 +35,8 @@ public class Parser {
             Pattern.CASE_INSENSITIVE);
     private static final Pattern MARK_PATTERN = Pattern.compile("^mark\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern UNMARK_PATTERN = Pattern.compile("^unmark\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern DELETE_PATTERN = Pattern.compile("^delete\\s+(\\d+)$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern DELETE_PATTERN = Pattern.compile("^delete\\s+(\\d+(?:\\s+\\d+)*)$",
+            Pattern.CASE_INSENSITIVE);
     private static final Pattern FIND_PATTERN = Pattern.compile("^find\\s+(.+)$", Pattern.CASE_INSENSITIVE);
 
     /**
@@ -131,8 +132,12 @@ public class Parser {
     private static Command parseDeleteCommand(String input) throws PepeExceptions {
         Matcher deleteMatcher = DELETE_PATTERN.matcher(input);
         if (deleteMatcher.matches()) {
-            int index = Integer.parseInt(deleteMatcher.group(1)) - 1;
-            return new DeleteCommand(index);
+            String[] parts = deleteMatcher.group(1).trim().split("\\s+");
+            int[] indices = new int[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                indices[i] = Integer.parseInt(parts[i]) - 1;
+            }
+            return new DeleteCommand(indices);
         } else {
             throw new PepeExceptions("To delete a task: delete <task-index> (task-index is a valid number)");
         }

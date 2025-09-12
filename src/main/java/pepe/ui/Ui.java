@@ -136,13 +136,16 @@ public class Ui {
      * Displays a message after deleting a task from the list.
      *
      * @param list the TaskList after deletion
-     * @param task the Task that was removed
+     * @param tasks the Tasks that were removed
      */
-    public String uiDelete(TaskList list, Task task) {
+    public String uiDelete(TaskList list, Task ... tasks) {
         assert list != null : "TaskList should not be null when deleting";
-        assert task != null : "Task to delete should not be null";
-        String message = "Noted. I've removed this task:\n";
-        message = message + (task.toString() + "\n") + "Now you have " + list.size() + " tasks in the list\n";
+        String message = "Noted. I've removed these tasks:\n";
+        for (Task task : tasks) {
+            message = message + (task.toString() + "\n");
+        }
+        int remaining = list.size() - tasks.length;
+        message += "Now you have " + remaining + " tasks in the list\n";
         return message;
     }
 
