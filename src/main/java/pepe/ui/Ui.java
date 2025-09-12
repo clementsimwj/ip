@@ -67,16 +67,16 @@ public class Ui {
     /**
      * Displays a message indicating that a task has been marked as done.
      *
-     * @param task the Task that was marked
+     * @param tasks an array of tasks to be marked
      */
-    public String uiMark(Task task) {
-        assert task != null : "Task to mark should not be null";
-        String message = "Nice! I've marked this task as done:\n";
-        String taskMessage = task.toString() + "\n";
-        message = message + taskMessage;
+    public String uiMark(Task ... tasks) {
+        assert tasks != null : "Tasks to mark should not be null";
+        String message = "Nice! I've marked these task(s) as done:\n";
+        for (Task task : tasks) {
+            message += task.toString() + "\n";
+        }
         return message;
     }
-
     /**
      * Displays a message indicating that a task has been unmarked (not done yet).
      *
@@ -140,7 +140,7 @@ public class Ui {
      */
     public String uiDelete(TaskList list, Task ... tasks) {
         assert list != null : "TaskList should not be null when deleting";
-        String message = "Noted. I've removed these tasks:\n";
+        String message = "Noted. I've removed these task(s):\n";
         for (Task task : tasks) {
             message = message + (task.toString() + "\n");
         }

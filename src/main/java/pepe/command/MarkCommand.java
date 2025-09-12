@@ -1,6 +1,7 @@
 package pepe.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import pepe.exception.PepeExceptions;
 import pepe.storage.Storage;
@@ -18,15 +19,15 @@ import pepe.ui.Ui;
  */
 public class MarkCommand extends Command {
 
-    private final int index;
+    private final int[] indices;
 
     /**
      * Creates a new MarkCommand for the specified task index.
      *
-     * @param index the 0-based index of the task to mark as done
+     * @param indices the array of indexes of the tasks to mark as done
      */
-    public MarkCommand(int index) {
-        this.index = index;
+    public MarkCommand(int[] indices) {
+        this.indices = indices;
     }
 
     /**
@@ -43,13 +44,19 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         try {
-            if (index >= 0 && index < tasks.size()) {
+            ArrayList<Task> markedTasks = new ArrayList<>();
+            for (int index : indices) {
+                if (index < 0 || index >= tasks.size()) {
+                    throw new PepeExceptions("There is no task at index: " + (index + 1)
+                            + "!\nAborting all Markings...");
+                }
+            }
+            for (int index : indices) {
                 Task task = tasks.get(index);
                 task.markTask();
-                super.setResponse(ui.uiMark(task));
-            } else {
-                throw new PepeExceptions("There is no task at index: " + (index + 1));
+                markedTasks.add(task);
             }
+            super.setResponse(ui.uiMark(markedTasks.toArray(new Task[0])));
             storage.save(tasks);
         } catch (IOException e) {
             throw new PepeExceptions("Error saving file: " + e.getMessage());

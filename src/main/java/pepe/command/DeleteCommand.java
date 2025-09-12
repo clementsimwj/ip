@@ -2,7 +2,6 @@ package pepe.command;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import pepe.exception.PepeExceptions;
 import pepe.storage.Storage;
