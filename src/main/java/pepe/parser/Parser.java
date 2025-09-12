@@ -111,7 +111,7 @@ public class Parser {
         }
     }
     /**
-     * Parses a 'unmark' command.
+     * Parses an 'unmark' command.
      *
      * @param input user input string
      * @return UnmarkCommand object with task index
