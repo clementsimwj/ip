@@ -80,13 +80,14 @@ public class Ui {
     /**
      * Displays a message indicating that a task has been unmarked (not done yet).
      *
-     * @param task the Task that was unmarked
+     * @param tasks the Task that was unmarked
      */
-    public String uiUnmark(Task task) {
-        assert task != null : "Task to unmark should not be null";
-        String message = "OK, I've marked this task as not done yet:\n";
-        String taskMessage = task.toString() + "\n";
-        message = message + taskMessage;
+    public String uiUnmark(Task ... tasks) {
+        assert tasks != null : "Task to unmark should not be null";
+        String message = "OK, I've unmarked these task(s) as not done yet:\n";
+        for (Task task : tasks) {
+            message += task.toString() + "\n";
+        }
         return message;
     }
 

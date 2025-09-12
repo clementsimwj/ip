@@ -120,8 +120,12 @@ public class Parser {
     private static Command parseUnmarkCommand(String input) throws PepeExceptions {
         Matcher unmarkMatcher = UNMARK_PATTERN.matcher(input);
         if (unmarkMatcher.matches()) {
-            int index = Integer.parseInt(unmarkMatcher.group(1)) - 1;
-            return new UnmarkCommand(index);
+            String[] parts = unmarkMatcher.group(1).trim().split("\\s+");
+            int[] indices = new int[parts.length];
+            for (int i = 0; i < parts.length; i++) {
+                indices[i] = Integer.parseInt(parts[i]) - 1;
+            }
+            return new UnmarkCommand(indices);
         } else {
             throw new PepeExceptions("To unmark a task: unmark <task-index> (task-index is a valid number)");
         }
