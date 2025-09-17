@@ -6,9 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import pepe.Pepe;
 import pepe.exception.PepeExceptions;
 import pepe.task.Deadlines;
 import pepe.task.Events;
@@ -194,11 +196,15 @@ public class Storage {
      * @param rawDate the raw date string from the file
      * @return the date string in yyyy-MM-dd format
      */
-    public String rawDateToString(String rawDate) {
-        assert rawDate != null && !rawDate.isBlank() : "Raw date string should not be null or empty";
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-        LocalDate date = LocalDate.parse(rawDate, inputFormatter);
-        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return date.format(outputFormatter);
+    public String rawDateToString(String rawDate) throws PepeExceptions {
+        try {
+            assert rawDate != null && !rawDate.isBlank() : "Raw date string should not be null or empty";
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+            LocalDate date = LocalDate.parse(rawDate, inputFormatter);
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            return date.format(outputFormatter);
+        } catch (DateTimeParseException e) {
+            throw new PepeExceptions("File has been tempered with...");
+        }
     }
 }

@@ -155,8 +155,7 @@ public class Ui {
         for (Task task : tasks) {
             message = message + (task.toString() + "\n");
         }
-        int remaining = list.size() - tasks.length;
-        message += "Now you have " + remaining + " tasks in the list\n";
+        message += "Now you have " + list.size() + " tasks in the list\n";
         return message;
     }
 

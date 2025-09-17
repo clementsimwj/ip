@@ -90,7 +90,7 @@ class UiTest {
     void testShowUiDelete() {
         String expected = "Amazing! Let's just pretend this task didn't exist!\n"
                 + todo1 + "\n"
-                + "Now you have " + (taskList.size() - 1) + " tasks in the list\n";
+                + "Now you have " + taskList.size() + " tasks in the list\n";
         assertEquals(expected, ui.showUiDelete(taskList, todo1));
     }
 

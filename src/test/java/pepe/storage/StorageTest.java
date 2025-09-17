@@ -31,11 +31,12 @@ class StorageTest {
     }
 
     @Test
-    void testRawDateToString() {
+    void testRawDateToString() throws PepeExceptions {
         String input = "Jan 1 2099";
         String expected = "2099-01-01";
         assertEquals(expected, storage.rawDateToString(input));
     }
+
 
     @Test
     void testSaveAndLoadWithToDos() throws IOException, PepeExceptions {

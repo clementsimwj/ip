@@ -37,6 +37,7 @@ public class Deadlines extends Task {
             throw new PepeExceptions("Invalid Input: Please check the format of your dates (yyyy-mm-dd)");
         }
     }
+
     /**
      * Returns a string representation of the Deadline task for display.
      * <p>
@@ -48,6 +49,7 @@ public class Deadlines extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dateline + ")";
     }
+
     /**
      * Returns a string representing the Deadline task in a file-friendly format.
      * <p>
