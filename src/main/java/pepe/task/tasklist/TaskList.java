@@ -73,6 +73,31 @@ public class TaskList {
     public void wipe() {
         this.taskList.removeIf(task -> task instanceof EmptyTask);
     }
+    /**
+     * Deletes multiple tasks from the task list at the specified indices.
+     * <p>
+     * Each task is first soft-deleted (replaced with an empty placeholder) using
+     * {@link #deleteTask(int)}. After all deletions are processed, the task list is
+     * compacted by invoking {@link #wipe()} to remove the placeholder entries.
+     * <p>
+     * This method ensures that index shifting issues are avoided when deleting
+     * multiple tasks from the underlying {@code ArrayList}.
+     *
+     * @param indices the array of task indices to delete. Each index should be in
+     *                the range {@code [0, size())} at the time of deletion.
+     * @return an {@link ArrayList} containing the {@link Task} objects that were deleted,
+     *         in the same order as the provided indices
+     * @throws IndexOutOfBoundsException if any of the provided indices are invalid
+     */
+    public ArrayList<Task> deleteSpecificTasks(int[] indices) {
+        ArrayList<Task> deletedTasks = new ArrayList<>(this.size());
+        for (int index : indices) {
+            Task deletedTask = this.deleteTask(index);
+            deletedTasks.add(deletedTask);
+        }
+        this.wipe();
+        return deletedTasks;
+    }
 
     /**
      * Checks if the task list is empty.

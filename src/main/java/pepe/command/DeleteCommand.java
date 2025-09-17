@@ -42,17 +42,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         try {
-            ArrayList<Task> deletedTasks = new ArrayList<>();
-            for (int index : indices) {
-                if (index < 0 || index >= tasks.size()) {
-                    throw new PepeExceptions("There is no task at index: " + (index + 1) + "!\nAborting Deletion...");
-                }
-            }
-            for (int index : indices) {
-                Task deletedTask = tasks.deleteTask(index);
-                deletedTasks.add(deletedTask);
-            }
-            tasks.wipe();
+            ArrayList<Task> deletedTasks = tasks.deleteSpecificTasks(this.indices);
             super.setResponse(ui.showUiDelete(tasks, deletedTasks.toArray(new Task[0])));
             storage.save(tasks);
         } catch (IOException e) {
