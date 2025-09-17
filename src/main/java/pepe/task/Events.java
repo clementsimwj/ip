@@ -72,8 +72,14 @@ public class Events extends Task {
      */
     @Override
     public String toFileFormat() {
-        assert startTime != null && !startTime.isBlank() : "Start time should be non-null and non-empty for file format";
-        assert endTime != null && !endTime.isBlank() : "End time should be non-null and non-empty for file format";
-        return "E" + " | " + super.checkMarked() + " | " + super.getName() + " | " + this.startTime + " - " + this.endTime;
+        assert startTime != null && !startTime.isBlank()
+                : "Start time should be non-null and non-empty for file format";
+        assert endTime != null && !endTime.isBlank()
+                : "End time should be non-null and non-empty for file format";
+        return "E" + " | " + super.checkMarked() + " | "
+                + super.getName()
+                + " | "
+                + this.startTime
+                + " - " + this.endTime;
     }
 }

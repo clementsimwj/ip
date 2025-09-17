@@ -32,7 +32,7 @@ public class Ui {
      * @return the greeting message
      */
     public String showUiGreetUser() {
-        String message = "Hello, I am pepe.Pepe!\nHow may I help you today?\n";
+        String message = "Hello, I am Pepe!\nHow may I help you today?\n";
         return message;
     }
 

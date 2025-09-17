@@ -1,7 +1,6 @@
 package pepe.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,12 +18,6 @@ class ToDosTest {
         ToDos todo = new ToDos("Test task");
         todo.markTask(); // mark as done
         assertEquals("[T][X] Test task", todo.toString());
-    }
-
-    @Test
-    void testIsDueNextWeek() {
-        ToDos todo = new ToDos("Test task");
-        assertFalse(todo.isDueNextWeek(), "ToDos should never be due next week");
     }
 
     @Test

@@ -2,6 +2,7 @@ package pepe.task.tasklist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import pepe.exception.PepeExceptions;
+import pepe.task.EmptyTask;
 import pepe.task.Task;
 import pepe.task.ToDos;
 
@@ -20,50 +22,73 @@ class TaskListTest {
     @BeforeEach
     void setUp() {
         taskList = new TaskList();
+        taskList.addTask(new ToDos("Task 1"));
+        taskList.addTask(new ToDos("Task 2"));
+        taskList.addTask(new ToDos("Task 3"));
     }
 
     @Test
-    void testAddTask() throws PepeExceptions {
-        Task task = new ToDos("Test Task");
-        taskList.addTask(task);
-        assertEquals(1, taskList.size());
-        assertEquals(task, taskList.get(0));
+    void testAddAndSize() {
+        assertEquals(3, taskList.size());
+        taskList.addTask(new ToDos("Task 4"));
+        assertEquals(4, taskList.size());
     }
 
     @Test
-    void testDeleteTask() throws PepeExceptions {
-        Task task1 = new ToDos("Task 1");
-        Task task2 = new ToDos("Task 2");
-        taskList.addTask(task1);
-        taskList.addTask(task2);
+    void testDeleteTask() {
+        Task deleted = taskList.deleteTask(1);
+        assertEquals("Task 2", deleted.getName());
+        assertTrue(taskList.get(1) instanceof EmptyTask);
+    }
 
-        Task removed = taskList.deleteTask(0);
-        assertEquals(task1, removed);
+    @Test
+    void testWipe() {
+        taskList.deleteTask(0);
+        taskList.deleteTask(2);
+        taskList.wipe();
         assertEquals(1, taskList.size());
-        assertEquals(task2, taskList.get(0));
+        assertEquals("Task 2", taskList.get(0).getName());
     }
 
     @Test
     void testIsEmpty() throws PepeExceptions {
-        assertTrue(taskList.isEmpty());
-        taskList.addTask(new ToDos("Task"));
         assertFalse(taskList.isEmpty());
+        TaskList emptyList = new TaskList();
+        assertTrue(emptyList.isEmpty());
     }
 
     @Test
-    void testGetSize() throws PepeExceptions {
-        assertEquals(0, taskList.size());
-        taskList.addTask(new ToDos("Task 1"));
-        taskList.addTask(new ToDos("Task 2"));
-        assertEquals(2, taskList.size());
+    void testGet() {
+        Task task = taskList.get(0);
+        assertEquals("Task 1", task.getName());
     }
 
     @Test
-    void testGetTaskListReturnsArrayList() throws PepeExceptions {
-        Task task = new ToDos("Task");
-        taskList.addTask(task);
-        ArrayList<Task> internalList = taskList.getTaskList();
-        assertEquals(1, internalList.size());
-        assertEquals(task, internalList.get(0));
+    void testFindTask() {
+        TaskList found = taskList.findTask("1");
+        assertEquals(1, found.size());
+        assertEquals("Task 1", found.get(0).getName());
+
+        TaskList notFound = taskList.findTask("xyz");
+        assertEquals(0, notFound.size());
+    }
+
+    @Test
+    void testGetTaskList() {
+        ArrayList<Task> underlyingList = taskList.getTaskList();
+        assertEquals(3, underlyingList.size());
+        assertEquals("Task 1", underlyingList.get(0).getName());
+    }
+
+    @Test
+    void testDeleteTaskIndexOutOfBounds() {
+        assertThrows(AssertionError.class, () -> taskList.deleteTask(-1));
+        assertThrows(AssertionError.class, () -> taskList.deleteTask(3));
+    }
+
+    @Test
+    void testGetIndexOutOfBounds() {
+        assertThrows(AssertionError.class, () -> taskList.get(-1));
+        assertThrows(AssertionError.class, () -> taskList.get(3));
     }
 }

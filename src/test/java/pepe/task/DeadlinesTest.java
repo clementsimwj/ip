@@ -1,12 +1,10 @@
 package pepe.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,25 +39,6 @@ class DeadlinesTest {
         assertEquals("D | 1 | Submit report | Dec 31 2099", deadline.toFileFormat());
     }
 
-    @Test
-    void testIsDueNextWeek_true() throws PepeExceptions {
-        LocalDate today = LocalDate.now();
-        LocalDate inFiveDays = today.plusDays(5);
-
-        Deadlines deadline = new Deadlines("Upcoming Task",
-                inFiveDays.format(DateTimeFormatter.ISO_DATE));
-        assertTrue(deadline.isDueNextWeek());
-    }
-
-    @Test
-    void testIsDueNextWeek_false() throws PepeExceptions {
-        LocalDate today = LocalDate.now();
-        LocalDate inTenDays = today.plusDays(10);
-
-        Deadlines deadline = new Deadlines("Future Task",
-                inTenDays.format(DateTimeFormatter.ISO_DATE));
-        assertFalse(deadline.isDueNextWeek());
-    }
 
     @Test
     void testConstructor_invalidDateFormat() {

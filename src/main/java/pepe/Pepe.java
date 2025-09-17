@@ -117,7 +117,8 @@ public class Pepe {
             System.out.println(c.getString());
             return c.getString();
         } catch (PepeExceptions e) {
-            return "Yo bro! \n" + e.getMessage();
+            commandType = null;
+            return "WARNING! \n" + e.getMessage();
         }
     }
     /**

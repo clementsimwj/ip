@@ -55,7 +55,6 @@ public class TaskList {
         taskList.set(index, new EmptyTask());
         return task;
     }
-
     /**
      * Permanently removes all tasks that have been marked as deleted (or set to {@code null})
      * from the task list.

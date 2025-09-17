@@ -54,7 +54,7 @@ class UiTest {
     void testUiMark() {
         Task task = new ToDos("Test task");
         String output = ui.showUiMark(task);
-        assertTrue(output.contains("Nice! I've marked this task as done:"));
+        assertTrue(output.contains("Nice! I've marked these task(s) as done:"));
         assertTrue(output.contains("Test task"));
     }
 
@@ -62,7 +62,7 @@ class UiTest {
     void testUiUnmark() {
         Task task = new ToDos("Test task");
         String output = ui.showUiUnmark(task);
-        assertTrue(output.contains("OK, I've marked this task as not done yet:"));
+        assertTrue(output.contains("OK, I've unmarked these task(s) as not done yet:"));
         assertTrue(output.contains("Test task"));
     }
 

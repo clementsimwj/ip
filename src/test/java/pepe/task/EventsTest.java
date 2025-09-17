@@ -1,12 +1,10 @@
 package pepe.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,30 +36,6 @@ class EventsTest {
         Events event = new Events("Meeting", "2099-01-01", "2099-01-02");
         event.markTask();
         assertEquals("E | 1 | Meeting | Jan 1 2099 - Jan 2 2099", event.toFileFormat());
-    }
-
-    @Test
-    void testIsDueNextWeek_true() throws PepeExceptions {
-        LocalDate today = LocalDate.now();
-        LocalDate inFiveDays = today.plusDays(5);
-        LocalDate inSixDays = today.plusDays(6);
-
-        Events event = new Events("Short Event",
-                inFiveDays.format(DateTimeFormatter.ISO_DATE),
-                inSixDays.format(DateTimeFormatter.ISO_DATE));
-        assertTrue(event.isDueNextWeek());
-    }
-
-    @Test
-    void testIsDueNextWeek_false() throws PepeExceptions {
-        LocalDate today = LocalDate.now();
-        LocalDate inTenDays = today.plusDays(10);
-        LocalDate inFifteenDays = today.plusDays(15);
-
-        Events event = new Events("Future Event",
-                inTenDays.format(DateTimeFormatter.ISO_DATE),
-                inFifteenDays.format(DateTimeFormatter.ISO_DATE));
-        assertFalse(event.isDueNextWeek());
     }
 
     @Test

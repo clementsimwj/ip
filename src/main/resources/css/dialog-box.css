@@ -5,6 +5,7 @@
     -fx-background-radius: 16px 16px 0 16px;
     -fx-border-radius: 16px 16px 0 16px;
     -fx-margin: 0 0 10 0px;
+    -fx-font-size: 12px;
 }
 
 .reply-label {
@@ -14,6 +15,50 @@
     -fx-border-radius: 1em 1em 1em 0;
     -fx-padding: 6px;
     -fx-margin: 0 0 0 10px
+    -fx-font-size: 12px;
+}
+
+.warning-label {
+    -fx-background-color: #8B0000; /* Dark red background */
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 1em 1em 1em 0;
+    -fx-border-radius: 1em 1em 1em 0;
+    -fx-padding: 6px;
+    -fx-margin: 0 0 0 10px
+    -fx-font-size: 12px;
+}
+
+/* Delete command */
+.delete-label {
+    -fx-background-color: #FFA500; /* Orange-Red */
+    -fx-text-fill: black;
+    -fx-background-radius: 1em 1em 1em 0;
+    -fx-border-radius: 1em 1em 1em 0;
+    -fx-padding: 6px;
+    -fx-margin: 0 0 0 10px;
+    -fx-font-size: 12px;
+}
+
+/* Mark/Unmark command */
+.mark-label {
+    -fx-background-color: #247f33; /* Lime green */
+    -fx-text-fill: white;
+    -fx-background-radius: 1em 1em 1em 0;
+    -fx-border-radius: 1em 1em 1em 0;
+    -fx-padding: 6px;
+    -fx-margin: 0 0 0 10px;
+    -fx-font-size: 12px;
+}
+
+/* Add task command */
+.add-label {
+    -fx-background-color: #1E90FF; /* Dodger blue */
+    -fx-text-fill: white;
+    -fx-background-radius: 1em 1em 1em 0;
+    -fx-border-radius: 1em 1em 1em 0;
+    -fx-padding: 6px;
+    -fx-margin: 0 0 0 10px;
+    -fx-font-size: 12px;
 }
 
 #displayPicture {
