@@ -52,8 +52,8 @@ public class DeleteCommand extends Command {
                 Task deletedTask = tasks.deleteTask(index);
                 deletedTasks.add(deletedTask);
             }
-            super.setResponse(ui.showUiDelete(tasks, deletedTasks.toArray(new Task[0])));
             tasks.wipe();
+            super.setResponse(ui.showUiDelete(tasks, deletedTasks.toArray(new Task[0])));
             storage.save(tasks);
         } catch (IOException e) {
             throw new PepeExceptions("Error saving file: " + e.getMessage());
