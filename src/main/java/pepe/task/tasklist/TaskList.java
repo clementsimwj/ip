@@ -3,6 +3,7 @@ package pepe.task.tasklist;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import pepe.exception.PepeExceptions;
 import pepe.task.EmptyTask;
 import pepe.task.Task;
 
@@ -89,8 +90,13 @@ public class TaskList {
      *         in the same order as the provided indices
      * @throws IndexOutOfBoundsException if any of the provided indices are invalid
      */
-    public ArrayList<Task> deleteSpecificTasks(int[] indices) {
+    public ArrayList<Task> deleteSpecificTasks(int[] indices) throws PepeExceptions {
         ArrayList<Task> deletedTasks = new ArrayList<>(this.size());
+        for (int index : indices) {
+            if (index < 0 || index >= this.size()) {
+                throw new PepeExceptions("There is no task at index: " + (index + 1) + "!\nAborting Deletion...");
+            }
+        }
         for (int index : indices) {
             Task deletedTask = this.deleteTask(index);
             deletedTasks.add(deletedTask);
@@ -152,6 +158,22 @@ public class TaskList {
                 .filter(task -> task.getName().contains(taskName))
                 .collect(Collectors.toCollection(ArrayList::new))
         );
+    }
+
+    public ArrayList<Task> markTasks(int[] indices) throws PepeExceptions {
+        ArrayList<Task> markedTasks = new ArrayList<>(this.size());
+        for (int index : indices) {
+            if (index < 0 || index >= this.size()) {
+                throw new PepeExceptions("There is no task at index: " + (index + 1)
+                        + "!\nAborting all Markings...");
+            }
+        }
+        for (int index : indices) {
+            Task task = this.get(index);
+            task.markTask();
+            markedTasks.add(task);
+        }
+        return markedTasks;
     }
 
 }

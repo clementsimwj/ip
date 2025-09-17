@@ -44,18 +44,7 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         try {
-            ArrayList<Task> markedTasks = new ArrayList<>();
-            for (int index : indices) {
-                if (index < 0 || index >= tasks.size()) {
-                    throw new PepeExceptions("There is no task at index: " + (index + 1)
-                            + "!\nAborting all Markings...");
-                }
-            }
-            for (int index : indices) {
-                Task task = tasks.get(index);
-                task.markTask();
-                markedTasks.add(task);
-            }
+            ArrayList<Task> markedTasks = tasks.markTasks(this.indices);
             super.setResponse(ui.showUiMark(markedTasks.toArray(new Task[0])));
             storage.save(tasks);
         } catch (IOException e) {
