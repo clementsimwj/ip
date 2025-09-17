@@ -114,7 +114,6 @@ public class Pepe {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
             commandType = c.getClass().getSimpleName();
-            System.out.println(c.getString());
             return c.getString();
         } catch (PepeExceptions e) {
             commandType = null;
