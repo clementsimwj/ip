@@ -43,18 +43,7 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         try {
-            ArrayList<Task> unmarkedTasks = new ArrayList<>();
-            for (int index : indices) {
-                if (index < 0 || index >= tasks.size()) {
-                    throw new PepeExceptions("There is no task at index: " + (index + 1)
-                            + "!\nAborting all Unmarkings...");
-                }
-            }
-            for (int index : indices) {
-                Task task = tasks.get(index);
-                task.unmarkTask();
-                unmarkedTasks.add(task);
-            }
+            ArrayList<Task> unmarkedTasks = tasks.unmarkTasks(this.indices);
             super.setResponse(ui.showUiUnmark(unmarkedTasks.toArray(new Task[0])));
             storage.save(tasks);
         } catch (IOException e) {

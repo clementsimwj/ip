@@ -159,7 +159,20 @@ public class TaskList {
                 .collect(Collectors.toCollection(ArrayList::new))
         );
     }
-
+    /**
+     * Marks multiple tasks in the task list as completed.
+     * <p>
+     * This method validates all provided indices first to ensure they are within
+     * bounds. If any index is invalid, no tasks are marked and a
+     * {@link pepe.exception.PepeExceptions} is thrown. If all indices are valid,
+     * each corresponding {@link Task} is marked using {@link Task#markTask()}.
+     * <p>
+     * The method returns the list of tasks that were successfully marked.
+     *
+     * @param indices an array of task indices to be marked as completed
+     * @return an {@link ArrayList} of {@link Task} objects that were marked
+     * @throws PepeExceptions if any of the provided indices are out of range
+     */
     public ArrayList<Task> markTasks(int[] indices) throws PepeExceptions {
         ArrayList<Task> markedTasks = new ArrayList<>(this.size());
         for (int index : indices) {
@@ -174,6 +187,35 @@ public class TaskList {
             markedTasks.add(task);
         }
         return markedTasks;
+    }
+    /**
+     * Unmarks multiple tasks in the task list as completed.
+     * <p>
+     * This method validates all provided indices first to ensure they are within
+     * bounds. If any index is invalid, no tasks are unmarked and a
+     * {@link pepe.exception.PepeExceptions} is thrown. If all indices are valid,
+     * each corresponding {@link Task} is unmarked using {@link Task#markTask()}.
+     * <p>
+     * The method returns the list of tasks that were successfully unmarked.
+     *
+     * @param indices an array of task indices to be unmarked as completed
+     * @return an {@link ArrayList} of {@link Task} objects that were unmarked
+     * @throws PepeExceptions if any of the provided indices are out of range
+     */
+    public ArrayList<Task> unmarkTasks(int[] indices) throws PepeExceptions {
+        ArrayList<Task> unmarkedTasks = new ArrayList<>(this.size());
+        for (int index : indices) {
+            if (index < 0 || index >= this.size()) {
+                throw new PepeExceptions("There is no task at index: " + (index + 1)
+                        + "!\nAborting all Markings...");
+            }
+        }
+        for (int index : indices) {
+            Task task = this.get(index);
+            task.unmarkTask();
+            unmarkedTasks.add(task);
+        }
+        return unmarkedTasks;
     }
 
 }
