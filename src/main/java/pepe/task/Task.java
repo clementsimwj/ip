@@ -3,15 +3,15 @@ package pepe.task;
 /**
  * Represents a generic task.
  * <p>
- * Each task has a name and a marked status indicating whether it is completed.
+ * Each task has a name and a isMarked status indicating whether it is completed.
  * Subclasses must implement specific behavior for due dates and file formatting.
  */
 public abstract class Task {
     /** The name or description of the task. */
     private final String name;
 
-    /** Whether the task is marked as done (true) or not (false). */
-    private boolean marked;
+    /** Whether the task is isMarked as done (true) or not (false). */
+    private boolean isMarked;
 
     /**
      * Constructs a new Task with the given name.
@@ -21,20 +21,20 @@ public abstract class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.marked = false;
+        this.isMarked = false;
     }
     /**
      * Marks the task as done.
      */
     public void markTask() {
-        this.marked = true;
+        this.isMarked = true;
     }
     /**
      * Marks the task as not done.
      */
     public void unmarkTask() {
 
-        this.marked = false;
+        this.isMarked = false;
     }
     /**
      * Returns the name of the task.
@@ -47,24 +47,24 @@ public abstract class Task {
     }
 
     /**
-     * Returns an integer representing whether the task is marked.
+     * Returns an integer representing whether the task is isMarked.
      *
-     * @return 1 if the task is marked as done, 0 if unmarked
+     * @return 1 if the task is isMarked as done, 0 if unmarked
      */
     public int checkMarked() {
-        return this.marked ? 1 : 0;
+        return this.isMarked ? 1 : 0;
     }
 
     /**
      * Returns a string representation of the task for display.
      * <p>
-     * Format: [X] taskName if marked, [ ] taskName if unmarked.
+     * Format: [X] taskName if isMarked, [ ] taskName if unmarked.
      *
      * @return a human-readable string representing the task
      */
     @Override
     public String toString() {
-        String markSymbol = this.marked ? "X" : " ";
+        String markSymbol = this.isMarked ? "X" : " ";
         return "[" + markSymbol + "] " + this.name;
     }
 

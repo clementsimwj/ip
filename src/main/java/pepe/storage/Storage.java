@@ -10,7 +10,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import pepe.Pepe;
 import pepe.exception.PepeExceptions;
 import pepe.task.Deadlines;
 import pepe.task.Events;
