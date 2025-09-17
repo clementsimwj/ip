@@ -87,7 +87,7 @@ class DeleteCommandTest {
                 PepeExceptions.class, () -> command.execute(tasks, ui, storage)
         );
 
-        assertEquals("There is no task at index: 6!\nAborting Deletion...", exception.getMessage());
+        assertEquals("There is no task at index: 6!\nAborting all Operations...", exception.getMessage());
     }
 
     @Test

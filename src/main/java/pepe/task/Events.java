@@ -15,8 +15,6 @@ import pepe.exception.PepeExceptions;
 public class Events extends Task {
     private String startTime;
     private String endTime;
-    private LocalDate start;
-    private LocalDate end;
 
     /**
      * Constructs a new Event task with the given name, start date, and end date.
@@ -29,20 +27,48 @@ public class Events extends Task {
     public Events(String name, String startTime, String endTime) throws PepeExceptions {
         super(name);
         assert name != null && !name.isBlank() : "Event name should not be null or empty";
-        assert startTime != null && !startTime.isBlank() : "Start time should not be null or empty";
-        assert endTime != null && !endTime.isBlank() : "End time should not be null or empty";
+        String[] dates = validateStartDate(startTime, endTime);
+        this.startTime = dates[0];
+        this.endTime = dates[1];
+    }
+    /**
+     * Validates and formats a start and end date for a task.
+     * <p>
+     * This method checks that both {@code startTime} and {@code endTime} are
+     * non-null and non-blank. It then parses them as {@link java.time.LocalDate}
+     * objects and enforces the following constraints:
+     * <ul>
+     *     <li>The end date cannot be before today.</li>
+     *     <li>The start date cannot be after the end date.</li>
+     * </ul>
+     * If the dates are valid, they are formatted into the pattern "MMM d yyyy"
+     * and returned as a two-element string array, with the start date at index 0
+     * and the end date at index 1.
+     *
+     * @param startTime the start date as a string in "yyyy-MM-dd" format
+     * @param endTime   the end date as a string in "yyyy-MM-dd" format
+     * @return a string array containing the formatted start and end dates
+     * @throws PepeExceptions if the input strings are in an invalid format, null,
+     *                        blank, or violate the date constraints
+     */
+    public String[] validateStartDate(String startTime, String endTime) throws PepeExceptions {
         try {
-            this.start = LocalDate.parse(startTime);
-            this.end = LocalDate.parse(endTime);
-            assert start != null : "Parsed start LocalDate should not be null";
-            assert end != null : "Parsed end LocalDate should not be null";
-            this.startTime = start.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            this.endTime = end.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            if (end.isBefore(LocalDate.now())) {
+            assert startTime != null && !startTime.isBlank() : "Start time should not be null or empty";
+            assert endTime != null && !endTime.isBlank() : "End time should not be null or empty";
+            String[] result = new String[2];
+            LocalDate parsedStartTime = LocalDate.parse(startTime);
+            LocalDate parsedEndTime = LocalDate.parse(endTime);
+            if (parsedEndTime.isBefore(LocalDate.now())) {
                 throw new PepeExceptions("Invalid Input: End Date cannot be before today");
             }
-            if (start.isAfter(end)) {
+            if (parsedStartTime.isAfter(parsedEndTime)) {
                 throw new PepeExceptions("Invalid Input: Start Date cannot be after End Date");
+            } else {
+                String formattedStartTime = parsedStartTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                String formattedEndTime = parsedEndTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                result[0] = formattedStartTime;
+                result[1] = formattedEndTime;
+                return result;
             }
         } catch (DateTimeParseException e) {
             throw new PepeExceptions("Invalid Input: Please check the format of your dates (yyyy-mm-dd)");

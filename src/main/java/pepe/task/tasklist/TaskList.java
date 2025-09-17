@@ -222,7 +222,7 @@ public class TaskList {
         for (int index : indices) {
             if (index < 0 || index >= this.size()) {
                 throw new PepeExceptions("There is no task at index: " + (index + 1)
-                        + "!\nAborting all Markings...");
+                        + "!\nAborting all Operations...");
             }
         }
         return true;
