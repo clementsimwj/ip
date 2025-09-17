@@ -37,19 +37,6 @@ public class Deadlines extends Task {
             throw new PepeExceptions("Invalid Input: Please check the format of your dates (yyyy-mm-dd)");
         }
     }
-
-    /**
-     * Checks if the deadline is within the next week.
-     *
-     * @return true if the deadline is today or within the next 7 days, false otherwise
-     */
-    public boolean isDueNextWeek() {
-        LocalDate today = LocalDate.now();
-        LocalDate nextWeek = today.plusWeeks(1);
-        assert date != null : "Date should never be null when checking due week";
-        return ((this.date.isAfter(today) || this.date.isEqual(today)) && this.date.isBefore(nextWeek));
-    }
-
     /**
      * Returns a string representation of the Deadline task for display.
      * <p>
@@ -61,7 +48,6 @@ public class Deadlines extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dateline + ")";
     }
-
     /**
      * Returns a string representing the Deadline task in a file-friendly format.
      * <p>
@@ -72,6 +58,6 @@ public class Deadlines extends Task {
     @Override
     public String toFileFormat() {
         assert dateline != null && !dateline.isBlank() : "Dateline should be non-null and non-empty for file format";
-        return "D" + " | " + super.isMarked() + " | " + super.getName() + " | " + this.dateline;
+        return "D" + " | " + super.checkMarked() + " | " + super.getName() + " | " + this.dateline;
     }
 }

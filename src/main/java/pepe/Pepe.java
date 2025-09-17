@@ -35,7 +35,7 @@ public class Pepe {
         try {
             tasks = new TaskList(storage.load());
         } catch (PepeExceptions e) {
-            ui.showError(e.getMessage());
+            ui.showUiError(e.getMessage());
             tasks = new TaskList();
         }
 
@@ -50,17 +50,36 @@ public class Pepe {
     public void run() {
         assert ui != null : "UI should not be null before running the main loop";
         assert tasks != null : "Tasks should not be null before running the main loop";
-        ui.uiGreetUser();
+        ui.showUiGreetUser();
         boolean isExit = false;
         while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (PepeExceptions e) {
-                ui.showError(e.getMessage());
-            }
+            isExit = handleUserCommand();
+        }
+    }
+    /**
+     * Handles a single cycle of user interaction in the main loop.
+     * <p>
+     * This method reads a command from the user through the {@link Ui},
+     * parses it into a {@link Command} using the {@link Parser},
+     * and executes the command with the current {@link TaskList} and {@link Storage}.
+     * <p>
+     * If the command signals application termination, the method returns {@code true}.
+     * Otherwise, it continues execution and returns {@code false}.
+     * Any {@link PepeExceptions} thrown during parsing or execution are caught,
+     * and the error message is displayed via the {@link Ui}.
+     *
+     * @return {@code true} if the executed command requests program exit,
+     *         {@code false} otherwise
+     */
+    private boolean handleUserCommand() {
+        try {
+            String fullCommand = ui.readCommand();
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, ui, storage);
+            return c.isExit();
+        } catch (PepeExceptions e) {
+            ui.showUiError(e.getMessage());
+            return false;
         }
     }
 
@@ -74,7 +93,21 @@ public class Pepe {
     public static void main(String[] args) {
         new Pepe("data/tasks.txt").run();
     }
-
+    /**
+     * Processes a user input command and returns the response as a string.
+     * <p>
+     * This method parses the input using {@link Parser#parse(String)}, executes
+     * the resulting {@link Command} on the current task list, UI, and storage,
+     * and updates the {@code commandType} field with the type of command executed.
+     * <p>
+     * If an exception occurs during parsing or execution, a user-friendly error
+     * message is returned.
+     *
+     * @param input the user's input command; must not be {@code null}
+     * @return the result message of executing the command, or an error message if
+     *         execution fails
+     * @throws AssertionError if {@code input} is {@code null}
+     */
     public String getResponse(String input) {
         assert input != null : "Input string should not be null";
         try {
@@ -87,7 +120,15 @@ public class Pepe {
             return "Yo bro! \n" + e.getMessage();
         }
     }
-
+    /**
+     * Returns the type of the last command executed.
+     * <p>
+     * The command type is the simple class name of the {@link Command} that was
+     * last executed via {@link #getResponse(String)}.
+     *
+     * @return the simple class name of the last executed command, or {@code null}
+     *         if no command has been executed yet
+     */
     public String getCommandType() {
         return commandType;
     }

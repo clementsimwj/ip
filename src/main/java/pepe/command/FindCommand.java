@@ -2,7 +2,6 @@ package pepe.command;
 
 import pepe.exception.PepeExceptions;
 import pepe.storage.Storage;
-import pepe.task.Task;
 import pepe.task.tasklist.TaskList;
 import pepe.ui.Ui;
 
@@ -23,7 +22,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         TaskList output = tasks.findTask(taskName);
-        super.setResponse(ui.uiFind(output));
+        super.setResponse(ui.showUiFind(output));
     }
 
 }

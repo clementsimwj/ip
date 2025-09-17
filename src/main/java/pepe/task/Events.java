@@ -48,19 +48,6 @@ public class Events extends Task {
             throw new PepeExceptions("Invalid Input: Please check the format of your dates (yyyy-mm-dd)");
         }
     }
-
-    /**
-     * Checks if the event is due within the next week based on the end date.
-     *
-     * @return true if the end date is within the next 7 days, false otherwise
-     */
-    public boolean isDueNextWeek() {
-        LocalDate today = LocalDate.now();
-        LocalDate nextWeek = today.plusWeeks(1);
-        assert end != null : "End date should never be null when checking due week";
-        return (this.end.isAfter(today) && this.end.isBefore(nextWeek));
-    }
-
     /**
      * Returns a string representation of the Event task for display.
      * <p>
@@ -75,8 +62,6 @@ public class Events extends Task {
         assert endTime != null && !endTime.isBlank() : "End time should be non-null and non-empty for display";
         return "[E]" + super.toString() + " (from: " + startTime + " to: " + endTime + ")";
     }
-
-
     /**
      * Returns a string representing the Event task in a file-friendly format.
      * <p>
@@ -89,6 +74,6 @@ public class Events extends Task {
     public String toFileFormat() {
         assert startTime != null && !startTime.isBlank() : "Start time should be non-null and non-empty for file format";
         assert endTime != null && !endTime.isBlank() : "End time should be non-null and non-empty for file format";
-        return "E" + " | " + super.isMarked() + " | " + super.getName() + " | " + this.startTime + " - " + this.endTime;
+        return "E" + " | " + super.checkMarked() + " | " + super.getName() + " | " + this.startTime + " - " + this.endTime;
     }
 }

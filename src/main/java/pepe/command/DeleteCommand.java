@@ -52,7 +52,7 @@ public class DeleteCommand extends Command {
                 Task deletedTask = tasks.deleteTask(index);
                 deletedTasks.add(deletedTask);
             }
-            super.setResponse(ui.uiDelete(tasks, deletedTasks.toArray(new Task[0])));
+            super.setResponse(ui.showUiDelete(tasks, deletedTasks.toArray(new Task[0])));
             tasks.wipe();
             storage.save(tasks);
         } catch (IOException e) {

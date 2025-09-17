@@ -13,7 +13,7 @@ import pepe.task.tasklist.TaskList;
  * and print the state of tasks and task lists in a user-friendly format.
  */
 public class Ui {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
 
 
@@ -29,16 +29,18 @@ public class Ui {
 
     /**
      * Displays the greeting message when the application starts.
+     * @return the greeting message
      */
-    public String uiGreetUser() {
+    public String showUiGreetUser() {
         String message = "Hello, I am pepe.Pepe!\nHow may I help you today?\n";
         return message;
     }
 
     /**
      * Displays the farewell message when exiting the application.
+     * @return the goodbye message
      */
-    public String uiSayBye() {
+    public String showUiSayBye() {
         String message = "Aww...so sad to see you leave! :(\n";
         return message;
     }
@@ -47,8 +49,9 @@ public class Ui {
      * Displays all tasks in the provided TaskList.
      *
      * @param taskList the TaskList containing tasks to display
+     * @return the lists of task numbered
      */
-    public String uiListTask(TaskList taskList) {
+    public String showUiListTask(TaskList taskList) {
         assert taskList != null : "TaskList should not be null when listing tasks";
         String message = "";
         if (taskList.isEmpty()) {
@@ -68,8 +71,9 @@ public class Ui {
      * Displays a message indicating that a task has been marked as done.
      *
      * @param tasks an array of tasks to be marked
+     * @return the task to string method with the mark changes
      */
-    public String uiMark(Task ... tasks) {
+    public String showUiMark(Task ... tasks) {
         assert tasks != null : "Tasks to mark should not be null";
         String message = "Nice! I've marked these task(s) as done:\n";
         for (Task task : tasks) {
@@ -81,8 +85,9 @@ public class Ui {
      * Displays a message indicating that a task has been unmarked (not done yet).
      *
      * @param tasks the Task that was unmarked
+     * @return the task to string method with the mark changes
      */
-    public String uiUnmark(Task ... tasks) {
+    public String showUiUnmark(Task ... tasks) {
         assert tasks != null : "Task to unmark should not be null";
         String message = "OK, I've unmarked these task(s) as not done yet:\n";
         for (Task task : tasks) {
@@ -96,8 +101,9 @@ public class Ui {
      *
      * @param list the TaskList containing the added task
      * @param task the Task that was added
+     * @return the string representation of the task and the updated task size
      */
-    public String uiAddToDo(TaskList list, Task task) {
+    public String showUiAddToDo(TaskList list, Task task) {
         assert list != null : "TaskList should not be null when adding ToDo";
         assert task != null : "Task to add should not be null";
         String message = "Got it. I've added this task:\n";
@@ -110,8 +116,9 @@ public class Ui {
      *
      * @param list the TaskList containing the added task
      * @param task the Task that was added
+     * @return the string representation of the task and the updated task size
      */
-    public String uiAddDeadline(TaskList list, Task task) {
+    public String showUiAddDeadline(TaskList list, Task task) {
         assert list != null : "TaskList should not be null when adding Deadline";
         assert task != null : "Task to add should not be null";
         String message = "Got it. I've added this task:\n";
@@ -124,8 +131,9 @@ public class Ui {
      *
      * @param list the TaskList containing the added task
      * @param task the Task that was added
+     * @return the string representation of the task and the updated task size
      */
-    public String uiAddEvent(TaskList list, Task task) {
+    public String showUiAddEvent(TaskList list, Task task) {
         assert list != null : "TaskList should not be null when adding Event";
         assert task != null : "Task to add should not be null";
         String message = "Got it. I've added this task:\n";
@@ -138,8 +146,9 @@ public class Ui {
      *
      * @param list the TaskList after deletion
      * @param tasks the Tasks that were removed
+     * @return the string representation of the task and the updated task size
      */
-    public String uiDelete(TaskList list, Task ... tasks) {
+    public String showUiDelete(TaskList list, Task ... tasks) {
         assert list != null : "TaskList should not be null when deleting";
         String message = "Noted. I've removed these task(s):\n";
         for (Task task : tasks) {
@@ -154,8 +163,9 @@ public class Ui {
      * Displays an ArrayList of type Task from the list.
      *
      * @param tasks the TaskList showing matches
+     * @return the string representation of the task found (if any)
      */
-    public String uiFind(TaskList tasks) {
+    public String showUiFind(TaskList tasks) {
         assert tasks != null : "TaskList should not be null when finding tasks";
         String message = "Here are the matching tasks according to your search:\n";
         if (tasks.isEmpty()) {
@@ -173,8 +183,9 @@ public class Ui {
      * Displays an error message to the user.
      *
      * @param message the error message to display
+     * @return the error message as a string
      */
-    public String showError(String message) {
+    public String showUiError(String message) {
         return message;
     }
 

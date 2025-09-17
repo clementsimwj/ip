@@ -23,22 +23,12 @@ public abstract class Task {
         this.name = name;
         this.marked = false;
     }
-
-    /**
-     * Checks if the task is due next week.
-     * <p>
-     * Must be implemented by subclasses to provide task-specific logic.
-     *
-     * @return true if the task is due next week, false otherwise
-     */
-    public abstract boolean isDueNextWeek();
     /**
      * Marks the task as done.
      */
     public void markTask() {
         this.marked = true;
     }
-
     /**
      * Marks the task as not done.
      */
@@ -46,7 +36,6 @@ public abstract class Task {
 
         this.marked = false;
     }
-
     /**
      * Returns the name of the task.
      *
@@ -62,7 +51,7 @@ public abstract class Task {
      *
      * @return 1 if the task is marked as done, 0 if unmarked
      */
-    public int isMarked() {
+    public int checkMarked() {
         return this.marked ? 1 : 0;
     }
 

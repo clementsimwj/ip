@@ -28,7 +28,7 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         try {
-            super.setResponse(ui.uiSayBye());
+            super.setResponse(ui.showUiSayBye());
             storage.save(tasks);
         } catch (IOException e) {
             throw new PepeExceptions("Error saving file: " + e.getMessage());

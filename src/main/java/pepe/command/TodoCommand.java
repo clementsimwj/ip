@@ -43,7 +43,7 @@ public class TodoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         try {
             tasks.addTask(this.task);
-            super.setResponse(ui.uiAddToDo(tasks, this.task));
+            super.setResponse(ui.showUiAddToDo(tasks, this.task));
             storage.save(tasks);
         } catch (IOException e) {
             throw new PepeExceptions("Error saving file: " + e.getMessage());

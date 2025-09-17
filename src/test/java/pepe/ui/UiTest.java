@@ -33,27 +33,27 @@ class UiTest {
 
     @Test
     void testUiGreet() {
-        String output = ui.uiGreetUser();
+        String output = ui.showUiGreetUser();
         assertTrue(output.contains("Hello, I am pepe.Pepe!\nHow may I help you today?\n"));
     }
 
     @Test
     void testUiBye() {
-        String output = ui.uiSayBye();
+        String output = ui.showUiSayBye();
         assertTrue(output.contains("Aww...so sad to see you leave! :("));
     }
 
     @Test
     void testUiListEmpty() {
         TaskList list = new TaskList();
-        String output = ui.uiListTask(list);
+        String output = ui.showUiListTask(list);
         assertTrue(output.contains("Your Task List is Empty..."));
     }
 
     @Test
     void testUiMark() {
         Task task = new ToDos("Test task");
-        String output = ui.uiMark(task);
+        String output = ui.showUiMark(task);
         assertTrue(output.contains("Nice! I've marked this task as done:"));
         assertTrue(output.contains("Test task"));
     }
@@ -61,7 +61,7 @@ class UiTest {
     @Test
     void testUiUnmark() {
         Task task = new ToDos("Test task");
-        String output = ui.uiUnmark(task);
+        String output = ui.showUiUnmark(task);
         assertTrue(output.contains("OK, I've marked this task as not done yet:"));
         assertTrue(output.contains("Test task"));
     }
@@ -71,7 +71,7 @@ class UiTest {
         Task task = new ToDos("Test task");
         TaskList list = new TaskList();
         list.addTask(task);
-        String output = ui.uiAddToDo(list, task);
+        String output = ui.showUiAddToDo(list, task);
         assertTrue(output.contains("Got it. I've added this task:"));
         assertTrue(output.contains("Test task"));
         assertTrue(output.contains("Now you have 1 tasks in the list"));

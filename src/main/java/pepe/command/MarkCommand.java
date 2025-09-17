@@ -56,7 +56,7 @@ public class MarkCommand extends Command {
                 task.markTask();
                 markedTasks.add(task);
             }
-            super.setResponse(ui.uiMark(markedTasks.toArray(new Task[0])));
+            super.setResponse(ui.showUiMark(markedTasks.toArray(new Task[0])));
             storage.save(tasks);
         } catch (IOException e) {
             throw new PepeExceptions("Error saving file: " + e.getMessage());

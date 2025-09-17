@@ -31,10 +31,13 @@ public class Parser {
     private static final Pattern TODO_PATTERN = Pattern.compile("^todo\\s+(.+)$", Pattern.CASE_INSENSITIVE);
     private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline\\s+(.+)\\s+/by\\s+(.+)$",
             Pattern.CASE_INSENSITIVE);
-    private static final Pattern EVENT_PATTERN = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to\\s+(.+)$",
+    private static final Pattern EVENT_PATTERN = Pattern.compile("^event\\s+(.+)\\s+/from\\s+(.+)\\s+/to"
+                    + "\\s+(.+)$",
             Pattern.CASE_INSENSITIVE);
-    private static final Pattern MARK_PATTERN = Pattern.compile("^mark\\s+(\\d+(?:\\s+\\d+)*)$", Pattern.CASE_INSENSITIVE);
-    private static final Pattern UNMARK_PATTERN = Pattern.compile("^unmark\\s+(\\d+(?:\\s+\\d+)*)$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern MARK_PATTERN = Pattern.compile("^mark\\s+(\\d+(?:\\s+\\d+)*)$",
+            Pattern.CASE_INSENSITIVE);
+    private static final Pattern UNMARK_PATTERN = Pattern.compile("^unmark\\s+(\\d+(?:\\s+\\d+)*)$",
+            Pattern.CASE_INSENSITIVE);
     private static final Pattern DELETE_PATTERN = Pattern.compile("^delete\\s+(\\d+(?:\\s+\\d+)*)$",
             Pattern.CASE_INSENSITIVE);
     private static final Pattern FIND_PATTERN = Pattern.compile("^find\\s+(.+)$", Pattern.CASE_INSENSITIVE);

@@ -55,7 +55,7 @@ public class UnmarkCommand extends Command {
                 task.unmarkTask();
                 unmarkedTasks.add(task);
             }
-            super.setResponse(ui.uiMark(unmarkedTasks.toArray(new Task[0])));
+            super.setResponse(ui.showUiMark(unmarkedTasks.toArray(new Task[0])));
             storage.save(tasks);
         } catch (IOException e) {
             throw new PepeExceptions("Error saving file: " + e.getMessage());

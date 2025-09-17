@@ -41,7 +41,7 @@ public class EventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws PepeExceptions {
         try {
             tasks.addTask(this.task);
-            super.setResponse(ui.uiAddEvent(tasks, this.task));
+            super.setResponse(ui.showUiAddEvent(tasks, this.task));
             storage.save(tasks);
         } catch (IOException e) {
             throw new PepeExceptions("Error saving file: " + e.getMessage());

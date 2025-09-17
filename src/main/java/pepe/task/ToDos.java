@@ -30,20 +30,6 @@ public class ToDos extends Task {
                 : "ToDo task name should not be null or empty for display";
         return "[T]" + super.toString();
     }
-
-    /**
-     * Checks if the ToDo task is due next week.
-     * <p>
-     * Always returns false as ToDo tasks do not have a specific due date.
-     *
-     * @return false
-     */
-    @Override
-    public boolean isDueNextWeek() {
-        //ToDo tasks have no dateline
-        return false;
-    }
-
     /**
      * Returns a string representing the ToDo task in a file-friendly format.
      * <p>
@@ -55,6 +41,6 @@ public class ToDos extends Task {
     public String toFileFormat() {
         assert super.getName() != null && !super.getName().isBlank()
                 : "ToDo task name should not be null or empty for file format";
-        return "T" + " | " + super.isMarked() + " | " + super.getName();
+        return "T" + " | " + super.checkMarked() + " | " + super.getName();
     }
 }

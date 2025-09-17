@@ -20,12 +20,13 @@ public class EmptyTask extends Task {
     public EmptyTask() {
         super("");
     }
-
-    @Override
-    public boolean isDueNextWeek() {
-        return false;
-    }
-
+    /**
+     * Returns a string representing the Deadline task in a file-friendly format.
+     * <p>
+     * Format: D | 1 | taskName | MMM d yyyy (if marked) or D | 0 | taskName | MMM d yyyy (if unmarked)
+     *
+     * @return the Deadline task formatted for saving to a file
+     */
     @Override
     public String toFileFormat() {
         return "";
