@@ -92,14 +92,11 @@ public class TaskList {
      */
     public ArrayList<Task> deleteSpecificTasks(int[] indices) throws PepeExceptions {
         ArrayList<Task> deletedTasks = new ArrayList<>(this.size());
-        for (int index : indices) {
-            if (index < 0 || index >= this.size()) {
-                throw new PepeExceptions("There is no task at index: " + (index + 1) + "!\nAborting Deletion...");
+        if (validateIndices(indices)) {
+            for (int index : indices) {
+                Task deletedTask = this.deleteTask(index);
+                deletedTasks.add(deletedTask);
             }
-        }
-        for (int index : indices) {
-            Task deletedTask = this.deleteTask(index);
-            deletedTasks.add(deletedTask);
         }
         this.wipe();
         return deletedTasks;
@@ -175,16 +172,12 @@ public class TaskList {
      */
     public ArrayList<Task> markTasks(int[] indices) throws PepeExceptions {
         ArrayList<Task> markedTasks = new ArrayList<>(this.size());
-        for (int index : indices) {
-            if (index < 0 || index >= this.size()) {
-                throw new PepeExceptions("There is no task at index: " + (index + 1)
-                        + "!\nAborting all Markings...");
+        if (validateIndices(indices)) {
+            for (int index : indices) {
+                Task task = this.get(index);
+                task.markTask();
+                markedTasks.add(task);
             }
-        }
-        for (int index : indices) {
-            Task task = this.get(index);
-            task.markTask();
-            markedTasks.add(task);
         }
         return markedTasks;
     }
@@ -204,18 +197,35 @@ public class TaskList {
      */
     public ArrayList<Task> unmarkTasks(int[] indices) throws PepeExceptions {
         ArrayList<Task> unmarkedTasks = new ArrayList<>(this.size());
+        if (validateIndices(indices)) {
+            for (int index : indices) {
+                Task task = this.get(index);
+                task.unmarkTask();
+                unmarkedTasks.add(task);
+            }
+        }
+        return unmarkedTasks;
+    }
+    /**
+     * Validates that all provided indices are within the bounds of the task list.
+     * <p>
+     * Iterates through the given array of indices and checks whether each index
+     * is greater than or equal to 0 and less than the size of the task list.
+     * If any index is invalid, a {@link PepeExceptions} is thrown with a
+     * descriptive error message.
+     *
+     * @param indices an array of task indices to validate
+     * @return {@code true} if all indices are valid
+     * @throws PepeExceptions if any index is out of bounds
+     */
+    private boolean validateIndices(int[] indices) throws PepeExceptions {
         for (int index : indices) {
             if (index < 0 || index >= this.size()) {
                 throw new PepeExceptions("There is no task at index: " + (index + 1)
                         + "!\nAborting all Markings...");
             }
         }
-        for (int index : indices) {
-            Task task = this.get(index);
-            task.unmarkTask();
-            unmarkedTasks.add(task);
-        }
-        return unmarkedTasks;
+        return true;
     }
 
 }
